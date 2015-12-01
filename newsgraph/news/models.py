@@ -24,7 +24,12 @@ class Edge(models.Model):
     def __str__(self):
         return str(self.origin) + " -> " + str(self.destination)
 
+# A class representing a table containing the Stories that have already been scrapped
 class Story(models.Model):
+    # The source of the news article
     source = models.URLField(max_length=1000)
+    # A function to return the source of the news article when called
     def __str__(self):
-        return source
+        return self.source
+
+        
