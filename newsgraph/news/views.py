@@ -2,6 +2,10 @@ from django.shortcuts import render
 
 from django.http import HttpResponse
 
+from .models import Node
 
 def index(request):
-    return HttpResponse("Hello, world. You're at the news index.")
+	nodes = Node.objects.all()
+	output = ', '.join([i.name for i in nodes])
+	print(output)
+	return HttpResponse(output)
