@@ -30,7 +30,6 @@ def keywords(text):
 def index(request):
 	for story in stories():
 		matches = Story.objects.filter(source=story)
-		print(matches)
 		if len(matches) == 0:
 			content = ""
 			with urllib.request.urlopen(story) as response:
