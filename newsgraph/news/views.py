@@ -14,11 +14,11 @@ def stories():
 		# Return the link to that story
 		yield story['link']
 
-
 def prepareForNLP(text):
 	sentences = nltk.sent_tokenize(text)
 	sentences = [nltk.word_tokenize(sent) for sent in sentences]
 	sentences = [nltk.pos_tag(sent) for sent in sentences]
+	return sentences
 
 def keywords(text):
 	sentences = prepareForNLP(text)
@@ -26,6 +26,15 @@ def keywords(text):
 		for word in sentence:
 			if word[1] == "NNP":
 				yield word[0]
+
+def keywordsList(text):
+	output = []
+	sentences = prepareForNLP(text)
+	for sentence in sentences:
+		for word in sentence:
+			if word[1] == "NNP":
+				output.append(word[0])
+	return output
 
 def index(request):
 	for story in stories():
@@ -46,6 +55,7 @@ def index(request):
 		# print("story:", story)
 		
 	stories_add = Story.objects.all()
-	output = '<br>===========================================================================================<br>'.join([i.content for i in stories_add])
+	output = ' '.join([i.content for i in stories_add])
+	output = "<br>".join(keywordsList(output))
 	# print(output)
 	return HttpResponse(output)
