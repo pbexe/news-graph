@@ -28,6 +28,7 @@ class Edge(models.Model):
 class Story(models.Model):
     # The source of the news article
     source = models.URLField(max_length=1000)
+    content = models.TextField()
     # A function to return the source of the news article when called
     def __str__(self):
         return self.source
