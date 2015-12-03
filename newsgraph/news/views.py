@@ -1,8 +1,9 @@
 from django.shortcuts import render
 from django.http import HttpResponse
+from django.utils import timezone
 from bs4 import BeautifulSoup
 import urllib.request
-from .models import Story
+from .models import Story, Node, Edge
 import feedparser
 import nltk
 
@@ -40,6 +41,7 @@ def index(request):
 	for story in stories():
 		matches = Story.objects.filter(source=story)
 		if len(matches) == 0:
+			print("Adding story:", story)
 			content = ""
 			with urllib.request.urlopen(story) as response:
 				html = response.read()
@@ -50,12 +52,11 @@ def index(request):
 					print("No content found")
 			s = Story(source=story, content=content)
 			s.save()
-
+			for kw in keywords(content):
+				node = Node(name=kw,date=timezone.now(),collectedFrom=s)
+				node.save()
 		else: print("Already in DB")
-		# print("story:", story)
-		
-	stories_add = Story.objects.all()
-	output = ' '.join([i.content for i in stories_add])
-	output = "<br>".join(keywordsList(output))
+	node_add = Node.objects.all()
+	output = '<br />'.join([i.name for i in node_add])
 	# print(output)
 	return HttpResponse(output)
