@@ -1,7 +1,7 @@
 # Import the library required to interact with the database
 from django.db import models
+# Import the library used for dates in Django
 from django.utils import timezone
-
 
 
 # A class representing a table containing the Stories that have already been scrapped
@@ -19,11 +19,14 @@ class Story(models.Model):
 class Node(models.Model):
     # The name of the node. ie: What it is representing
     name = models.CharField(max_length=50)
+    # The date that the node was added to the database
     date = models.DateTimeField('Date Collected', default=timezone.now())
+    # The news story that the node was  extracted from
     collectedFrom = models.ForeignKey(Story, related_name='story_collected_from', default="")
     # A function to return the name of the node when called
     def __str__(self):
         return self.name
+
 
 # A class representing a table containing the nodes
 class Edge(models.Model):

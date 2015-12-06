@@ -37,7 +37,6 @@ def keywordsList(text):
 				output.append(word[0])
 	return output
 
-
 def updateDB():
 	for story in stories():
 		matches = Story.objects.filter(source=story)
@@ -48,17 +47,19 @@ def updateDB():
 				html = response.read()
 				soup = BeautifulSoup(html, "html.parser")
 				if soup != "":
-					# kill all script and style elements
-					for script in soup(["script", "style"]):
-					    script.extract()    # rip it out
+					for junk in soup(["script", "style", "img"]):
+					    junk.extract()
 					content = soup.find("div", {"class": "story-body"}).get_text()
 				else:
 					print("No content found")
 			s = Story(source=story, content=content)
 			s.save()
 			for kw in keywords(content):
-				node = Node(name=kw,date=timezone.now(),collectedFrom=s)
-				node.save()
+				DBalready = []
+				if kw not in DBalready:
+					DBalready.append(kw)
+					node = Node(name=kw,date=timezone.now(),collectedFrom=s)
+					node.save()
 		else: print("Already in DB")
 
 
