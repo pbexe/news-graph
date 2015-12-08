@@ -69,6 +69,7 @@ def updateDB():
 					DBalready.append(kw)
 					node = Node(name=kw,date=timezone.now(),collectedFrom=s)
 					node.save()
+			
 		else: print("Already in DB")
 
 
