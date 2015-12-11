@@ -41,6 +41,44 @@ def keywordsList(text):
 				output.append(word[0])
 	return output
 
+def makeEdges(nodes, story):
+	while True:
+		if len(nodes) > 0:
+			node = nodes[0]
+			nodes.remove(node)
+			for i in nodes:
+				edge = Edge(source=story,origin=node,destination=i)
+				edge.save()
+				print(edge)
+		else:
+			break
+
+
+def addStory(story):
+	print("Adding story:", story)
+	content = ""
+	with urllib.request.urlopen(story) as response:
+		html = response.read()
+		soup = BeautifulSoup(html, "html.parser")
+		if soup != "":
+			for junk in soup(["script", "style", "img"]):
+			    junk.extract()
+			content = soup.find("div", {"class": "story-body"}).get_text()
+		else:
+			print("No content found")
+	s = Story(source=story, content=content)
+	s.save()
+	content = content.replace(".", ". ")
+	DBalready = []
+	nodes = []
+	for kw in keywords(content):
+		if kw not in DBalready:
+			DBalready.append(kw)
+			node = Node(name=kw,date=timezone.now(),collectedFrom=s)
+			nodes.append(node)
+			node.save()
+	makeEdges(nodes, story)
+
 # Updates the DB to a more recent version of the news
 def updateDB():
 	# For each story currently on the BBC RSS feed
@@ -49,33 +87,18 @@ def updateDB():
 		matches = Story.objects.filter(source=story)
 		# If the story isn't in the database
 		if len(matches) == 0:
-			print("Adding story:", story)
-			content = ""
-			with urllib.request.urlopen(story) as response:
-				html = response.read()
-				soup = BeautifulSoup(html, "html.parser")
-				if soup != "":
-					for junk in soup(["script", "style", "img"]):
-					    junk.extract()
-					content = soup.find("div", {"class": "story-body"}).get_text()
-				else:
-					print("No content found")
-			s = Story(source=story, content=content)
-			s.save()
-			content = content.replace(".", ". ")
-			for kw in keywords(content):
-				DBalready = []
-				if kw not in DBalready:
-					DBalready.append(kw)
-					node = Node(name=kw,date=timezone.now(),collectedFrom=s)
-					node.save()
-			
+			addStory(story)
 		else: print("Already in DB")
 
 
 def index(request):
 	updateDB()
-	node_add = Node.objects.all()
-	output = '<br />'.join([i.name for i in node_add])
+	edge_add = Edge.objects.all()
+	output = ""
+	for edge in edge_add:
+		output += edge.origin.name
+		output += " -> "
+		output += edge.destination.name
+		output += "<br />"
 	# print(output)
 	return HttpResponse(output)
