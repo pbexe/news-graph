@@ -56,7 +56,7 @@ def makeEdges(nodes, story):
 			for i in nodes:
 				edge = Edge(source=story,origin=node,destination=i)
 				edge.save()
-				#print(edge)
+				print(edge)
 		else:
 			break
 
