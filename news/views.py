@@ -23,10 +23,17 @@ def prepareForNLP(text):
 	sentences = [nltk.pos_tag(sent) for sent in sentences]
 	return sentences
 
+def chunk(sentence):
+	chunkToExtract = "NP: {<NNP>*<DT>?<NNP>*}"
+	parser = nltk.RegexpParser(chunkToExtract)
+	result = parser.parse(sentence)
+	result.draw()
+
 # Yields the keywords (NNPs) from the input as tuples
 def keywords(text):
 	sentences = prepareForNLP(text)
 	for sentence in sentences:
+		#chunk(sentence)
 		for word in sentence:
 			if word[1] == "NNP":
 				yield word[0]
@@ -49,7 +56,7 @@ def makeEdges(nodes, story):
 			for i in nodes:
 				edge = Edge(source=story,origin=node,destination=i)
 				edge.save()
-				print(edge)
+				#print(edge)
 		else:
 			break
 
@@ -63,7 +70,10 @@ def addStory(story):
 		if soup != "":
 			for junk in soup(["script", "style", "img"]):
 			    junk.extract()
-			content = soup.find("div", {"class": "story-body"}).get_text()
+			try:
+				content = soup.find("div", {"class": "story-body"}).get_text()
+			except:
+				pass
 		else:
 			print("No content found")
 	s = Story(source=story, content=content)
