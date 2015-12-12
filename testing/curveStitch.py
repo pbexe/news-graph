@@ -1,5 +1,5 @@
 nums = []
-for i in range(1,1001):
+for i in range(1,11):
 	nums.append(i)
 relations = []
 while True:

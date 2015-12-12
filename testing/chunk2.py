@@ -9,13 +9,18 @@ def prepareForNLP(text):
 def chunk(sentence):
 	chunkToExtract = """
 	NP: {<NNP>*}
-		{<DT>?<JJ>?<NNS>}"""
+		# {<DT>?<JJ>?<NNS>}
+		{<NN><NN>}"""
 	parser = nltk.RegexpParser(chunkToExtract)
 	result = parser.parse(sentence)
-	result.draw()
-	
+	for subtree in result.subtrees():
+		if subtree.label() == 'NP':
+			t = subtree
+			t = ' '.join(word for word, pos in t.leaves())
+			print(t)
 
 
-sentences = prepareForNLP("Saudi Arabia is going to the polls for unprecedented elections in which women can cast a ballot for the first time.")
+
+sentences = prepareForNLP("France's Laurent Fabius says new climate draft would be legally binding and aims to keep temperature rises 'well below 2C'")
 for sentence in sentences:
 	chunk(sentence)
