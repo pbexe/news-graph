@@ -118,9 +118,11 @@ def updateDB():
 			addStory(story)
 		else: print("Already in DB")
 
-
-def index(request):
+def update(request):
 	updateDB()
+	return HttpResponse("Updated DB")
+def index(request):
+	print("Started DB lookup")
 	edge_add = Edge.objects.all()
 	output = ""
 	for edge in edge_add:
