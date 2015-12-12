@@ -4,13 +4,16 @@ def prepareForNLP(text):
 	sentences = nltk.sent_tokenize(text)
 	sentences = [nltk.word_tokenize(sent) for sent in sentences]
 	sentences = [nltk.pos_tag(sent) for sent in sentences]
+	print(sentences)
 	return sentences
 
 def chunk(sentence):
 	chunkToExtract = """
 	NP: {<NNP>*}
 		# {<DT>?<JJ>?<NNS>}
-		{<NN><NN>}"""
+		{<NN>*<NNP>*}
+		{<NNP>*<NN>*}
+		{<NNP><IN><NNP>}"""
 	parser = nltk.RegexpParser(chunkToExtract)
 	result = parser.parse(sentence)
 	for subtree in result.subtrees():
@@ -21,6 +24,6 @@ def chunk(sentence):
 
 
 
-sentences = prepareForNLP("France's Laurent Fabius says new climate draft would be legally binding and aims to keep temperature rises 'well below 2C'")
+sentences = prepareForNLP("Republic of Ireland")
 for sentence in sentences:
 	chunk(sentence)

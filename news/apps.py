@@ -6,4 +6,4 @@ class MyAppConfig(AppConfig):
 	def ready(self):
 		print("Checking nltk")
 		nltk.download("book")
-		("NLTK initiated")
+		print("NLTK initiated")

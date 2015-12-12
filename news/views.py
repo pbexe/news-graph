@@ -6,6 +6,12 @@ import urllib.request
 from .models import Story, Node, Edge
 import feedparser
 import nltk
+import sys
+
+if sys.stdout.encoding != 'cp850':
+  sys.stdout = codecs.getwriter('cp850')(sys.stdout.buffer, 'strict')
+if sys.stderr.encoding != 'cp850':
+  sys.stderr = codecs.getwriter('cp850')(sys.stderr.buffer, 'strict')
 
 # Returns a list of stories currently on the front page of the BBC website
 def stories():
@@ -34,18 +40,30 @@ def keywords(text):
 	sentences = prepareForNLP(text)
 	for sentence in sentences:
 		#chunk(sentence)
-		for word in sentence:
-			if word[1] == "NNP":
-				yield word[0]
+		for kw in chunk(sentence):
+			yield kw
+
+def chunk(sentence):
+	chunkToExtract = """
+	NP: {<NNP>*}
+		# {<DT>?<JJ>?<NNS>}
+		#{<NN>*<NP>*}
+		#{<NP>*<NN>*}"""
+	parser = nltk.RegexpParser(chunkToExtract)
+	result = parser.parse(sentence)
+	for subtree in result.subtrees():
+		if subtree.label() == 'NP':
+			t = subtree
+			t = ' '.join(word for word, pos in t.leaves())
+			yield t
 
 # Returns the keywords (NNPs) from the input as a list of tuples
 def keywordsList(text):
 	output = []
 	sentences = prepareForNLP(text)
 	for sentence in sentences:
-		for word in sentence:
-			if word[1] == "NNP":
-				output.append(word[0])
+		for kw in chunk(sentence):
+			output.append(kw)
 	return output
 
 def makeEdges(nodes, story):
