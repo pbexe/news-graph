@@ -1,17 +1,16 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+import os
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "newsgraph.settings")
+import django
+django.setup()
 from django.utils import timezone
 from bs4 import BeautifulSoup
 import urllib.request
-from .models import Story, Node, Edge
+from news.models import Story, Node, Edge
 import feedparser
 import nltk
 import sys
 
-if sys.stdout.encoding != 'cp850':
-  sys.stdout = codecs.getwriter('cp850')(sys.stdout.buffer, 'strict')
-if sys.stderr.encoding != 'cp850':
-  sys.stderr = codecs.getwriter('cp850')(sys.stderr.buffer, 'strict')
+
 
 # Returns a list of stories currently on the front page of the BBC website
 def stories():
