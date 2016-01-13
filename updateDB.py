@@ -1,14 +1,36 @@
+# Import the library needed to interact with the operating system
 import os
+
+# Set the environment to Django
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "newsgraph.settings")
+
+# Import the core Django library
 import django
+
+# Setup Django
 django.setup()
+
+# Import the timezone library to timestamp entries into the DB
 from django.utils import timezone
+
+# Import BeautifulSoup4 to clean the web pages
 from bs4 import BeautifulSoup
+
+# Import urllib to scrape the web pages
 import urllib.request
+
+# Import the DB tables
 from news.models import Story, Node, Edge
+
+# Import the library to access the RSS feeds
 import feedparser
+
+# Import the natural language toolkit to tokenize the scraped text
 import nltk
+
+# Import the library needed to interact with the outputs
 import sys
+
 
 
 
@@ -21,18 +43,16 @@ def stories():
 		# Return the link to that story
 		yield story['link']
 
-# Tokenizes the input
+# Tokenizes the input so it can be analysed
 def prepareForNLP(text):
+	# Split up the input into sentences
 	sentences = nltk.sent_tokenize(text)
+	# Split up the sentences into words
 	sentences = [nltk.word_tokenize(sent) for sent in sentences]
+	# Tokenize the 
 	sentences = [nltk.pos_tag(sent) for sent in sentences]
+	# Return the split and tokenized sentences
 	return sentences
-
-def chunk(sentence):
-	chunkToExtract = "NP: {<NNP>*<DT>?<NNP>*}"
-	parser = nltk.RegexpParser(chunkToExtract)
-	result = parser.parse(sentence)
-	result.draw()
 
 # Yields the keywords (NNPs) from the input as tuples
 def keywords(text):

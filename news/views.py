@@ -8,11 +8,6 @@ import feedparser
 import nltk
 import sys
 
-if sys.stdout.encoding != 'cp850':
-  sys.stdout = codecs.getwriter('cp850')(sys.stdout.buffer, 'strict')
-if sys.stderr.encoding != 'cp850':
-  sys.stderr = codecs.getwriter('cp850')(sys.stderr.buffer, 'strict')
-
 # Returns a list of stories currently on the front page of the BBC website
 def stories():
 	# Connect to the BBC RSS feed
