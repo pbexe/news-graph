@@ -8,11 +8,6 @@ import feedparser
 import nltk
 import sys
 
-if sys.stdout.encoding != 'cp850':
-  sys.stdout = codecs.getwriter('cp850')(sys.stdout.buffer, 'strict')
-if sys.stderr.encoding != 'cp850':
-  sys.stderr = codecs.getwriter('cp850')(sys.stderr.buffer, 'strict')
-
 # Returns a list of stories currently on the front page of the BBC website
 def stories():
 	# Connect to the BBC RSS feed
@@ -29,19 +24,6 @@ def prepareForNLP(text):
 	sentences = [nltk.pos_tag(sent) for sent in sentences]
 	return sentences
 
-def chunk(sentence):
-	chunkToExtract = "NP: {<NNP>*<DT>?<NNP>*}"
-	parser = nltk.RegexpParser(chunkToExtract)
-	result = parser.parse(sentence)
-	result.draw()
-
-# Yields the keywords (NNPs) from the input as tuples
-def keywords(text):
-	sentences = prepareForNLP(text)
-	for sentence in sentences:
-		#chunk(sentence)
-		for kw in chunk(sentence):
-			yield kw
 
 def chunk(sentence):
 	chunkToExtract = """
@@ -56,6 +38,16 @@ def chunk(sentence):
 			t = subtree
 			t = ' '.join(word for word, pos in t.leaves())
 			yield t
+
+# Yields the keywords (NNPs) from the input as tuples
+def keywords(text):
+	sentences = prepareForNLP(text)
+	for sentence in sentences:
+		#chunk(sentence)
+		for kw in chunk(sentence):
+			yield kw
+
+
 
 # Returns the keywords (NNPs) from the input as a list of tuples
 def keywordsList(text):
