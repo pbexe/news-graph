@@ -63,10 +63,14 @@ def keywords(text):
 			yield kw
 
 def chunk(sentence):
+	# Chunking pattern
 	chunkToExtract = """
 	NP: {<NNP>*}"""
+	# Create the new parser
 	parser = nltk.RegexpParser(chunkToExtract)
+	# Parse the text
 	result = parser.parse(sentence)
+	# Yield the proper noun phrases
 	for subtree in result.subtrees():
 		if subtree.label() == 'NP':
 			t = subtree
