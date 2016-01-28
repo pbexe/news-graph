@@ -1,12 +1,38 @@
-from django.shortcuts import render
-from django.http import HttpResponse
+# Import the library needed to interact with the operating system
+import os
+
+# Set the environment to Django
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
+
+# Import the core Django library
+import django
+
+# Setup Django
+django.setup()
+
+# Import the timezone library to timestamp entries into the DB
 from django.utils import timezone
+
+# Import BeautifulSoup4 to clean the web pages
 from bs4 import BeautifulSoup
+
+# Import urllib to scrape the web pages
 import urllib.request
-from .models import Story, Node, Edge
+
+# Import the DB tables
+from relationships.models import Story, Node, Edge
+
+# Import the library to access the RSS feeds
 import feedparser
+
+# Import the natural language toolkit to tokenize the scraped text
 import nltk
+
+# Import the library needed to interact with the outputs
 import sys
+
+
+
 
 # Returns a list of stories currently on the front page of the BBC website
 def stories():
@@ -17,22 +43,16 @@ def stories():
 		# Return the link to that story
 		yield story['link']
 
-# Tokenizes the input
+# Tokenizes the input so it can be analysed
 def prepareForNLP(text):
-	# Split the text into sentences
+	# Split up the input into sentences
 	sentences = nltk.sent_tokenize(text)
-	# Split the sentences into words
+	# Split up the sentences into words
 	sentences = [nltk.word_tokenize(sent) for sent in sentences]
-	# POS tag the words
+	# Tokenize the 
 	sentences = [nltk.pos_tag(sent) for sent in sentences]
-	# Return the tagged sentences
+	# Return the split and tokenized sentences
 	return sentences
-
-def chunk(sentence):
-	chunkToExtract = "NP: {<NNP>*<DT>?<NNP>*}"
-	parser = nltk.RegexpParser(chunkToExtract)
-	result = parser.parse(sentence)
-	result.draw()
 
 # Yields the keywords (NNPs) from the input as tuples
 def keywords(text):
@@ -43,13 +63,14 @@ def keywords(text):
 			yield kw
 
 def chunk(sentence):
+	# Chunking pattern
 	chunkToExtract = """
-	NP: {<NNP>*}
-		# {<DT>?<JJ>?<NNS>}
-		#{<NN>*<NP>*}
-		#{<NP>*<NN>*}"""
+	NP: {<NNP>*}"""
+	# Create the new parser
 	parser = nltk.RegexpParser(chunkToExtract)
+	# Parse the text
 	result = parser.parse(sentence)
+	# Yield the proper noun phrases
 	for subtree in result.subtrees():
 		if subtree.label() == 'NP':
 			t = subtree
@@ -117,16 +138,6 @@ def updateDB():
 			addStory(story)
 		else: print("Already in DB")
 
-def update(request):
+if __name__ == "__main__":
+	print("Updating DB")
 	updateDB()
-	return HttpResponse("Updated DB")
-def index(request):
-	print("Started DB lookup")
-	edge_add = Edge.objects.all()
-	output = ""
-	for edge in edge_add:
-		output += edge.origin.name
-		output += " -> "
-		output += edge.destination.name
-		output += "<br />"
-	return HttpResponse(output)
