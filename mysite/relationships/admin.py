@@ -1,3 +1,7 @@
 from django.contrib import admin
 
-# Register your models here.
+from .models import Node, Edge, Story
+
+admin.site.register(Node)
+admin.site.register(Edge)
+admin.site.register(Story)

@@ -10,7 +10,7 @@ def index(request):
 	for edge in edge_add:
 		# Add that edge to the output
 		output += edge.origin.name
-		output += " -> "
+		output += " => "
 		output += edge.destination.name
 		output += "<br />"
 	# Return the output to the client
