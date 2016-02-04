@@ -1,3 +1,4 @@
+
 # Import the library needed to interact with the operating system
 import os
 
@@ -20,7 +21,7 @@ from bs4 import BeautifulSoup
 import urllib.request
 
 # Import the DB tables
-from news.models import Story, Node, Edge
+from relationships.models import Story, Node, Edge
 
 # Import the library to access the RSS feeds
 import feedparser
@@ -31,17 +32,10 @@ import nltk
 # Import the library needed to interact with the outputs
 import sys
 
-
-
-
-# Returns a list of stories currently on the front page of the BBC website
 def stories():
-	# Connect to the BBC RSS feed
 	news = feedparser.parse('http://feeds.bbci.co.uk/news/rss.xml?edition=uk')
-	# For every story
-	for story in news.entries:
-		# Return the link to that story
-		yield story['link']
+	for text in news.entries:
+		yield (text.link, text.description)
 
 # Tokenizes the input so it can be analysed
 def prepareForNLP(text):
@@ -53,14 +47,6 @@ def prepareForNLP(text):
 	sentences = [nltk.pos_tag(sent) for sent in sentences]
 	# Return the split and tokenized sentences
 	return sentences
-
-# Yields the keywords (NNPs) from the input as tuples
-def keywords(text):
-	sentences = prepareForNLP(text)
-	for sentence in sentences:
-		#chunk(sentence)
-		for kw in chunk(sentence):
-			yield kw
 
 def chunk(sentence):
 	# Chunking pattern
@@ -77,14 +63,13 @@ def chunk(sentence):
 			t = ' '.join(word for word, pos in t.leaves())
 			yield t
 
-# Returns the keywords (NNPs) from the input as a list of tuples
-def keywordsList(text):
-	output = []
+# Yields the keywords (NNPs) from the input as tuples
+def keywords(text):
 	sentences = prepareForNLP(text)
 	for sentence in sentences:
+		#chunk(sentence)
 		for kw in chunk(sentence):
-			output.append(kw)
-	return output
+			yield kw
 
 def makeEdges(nodes, story):
 	while True:
@@ -98,28 +83,13 @@ def makeEdges(nodes, story):
 		else:
 			break
 
-
 def addStory(story):
-	print("Adding story:", story)
-	content = ""
-	with urllib.request.urlopen(story) as response:
-		html = response.read()
-		soup = BeautifulSoup(html, "html.parser")
-		if soup != "":
-			for junk in soup(["script", "style", "img"]):
-			    junk.extract()
-			try:
-				content = soup.find("div", {"class": "story-body"}).get_text()
-			except:
-				pass
-		else:
-			print("No content found")
-	s = Story(source=story, content=content)
+	print("Adding story:", story[1])
+	s = Story(source=story[0], content=story[1])
 	s.save()
-	content = content.replace(".", ". ")
 	DBalready = []
 	nodes = []
-	for kw in keywords(content):
+	for kw in keywords(story[1]):
 		if kw not in DBalready:
 			DBalready.append(kw)
 			node = Node(name=kw,date=timezone.now(),collectedFrom=s)
@@ -132,7 +102,7 @@ def updateDB():
 	# For each story currently on the BBC RSS feed
 	for story in stories():
 		# More than 0 if the story is in the DB
-		matches = Story.objects.filter(source=story)
+		matches = Story.objects.filter(source=story[0])
 		# If the story isn't in the database
 		if len(matches) == 0:
 			addStory(story)
