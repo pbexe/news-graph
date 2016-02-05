@@ -27,74 +27,78 @@
         <script src='http://d3js.org/d3.v3.min.js'></script>
         <script>
         d3.json("/relationships/ajax/", function(error, root) {
-                 if (error) {throw error;}
-                 var width = window.innerWidth - 20,
-                     height = window.innerHeight - 20;
-                 var color = d3.scale.category20();
-                 var force = d3.layout.force()
-                     .charge(-50)
-                     .linkDistance(30)
-                     .size([width, height]);
-                 var svg = d3.select("body").append("svg")
-                     .attr("width", width)
-                     .attr("height", height);
-                 var graph = root;
-                 var nodeMap = {};
-                 graph.nodes.forEach(function(d) {
-                     nodeMap[d.name] = d;
-                 });
-                 graph.links.forEach(function(l) {
-                     l.source = nodeMap[l.source];
-                     l.target = nodeMap[l.target];
-                 })
-                 force.nodes(graph.nodes)
-                     .links(graph.links)
-                     .start();
-                 var link = svg.selectAll(".link")
-                     .data(graph.links)
-                     .enter().append("line")
-                     .attr("class", "link")
-                     .style("stroke-width", function(d) {
-                         //return Math.sqrt(d.value) + 1;
-                         return 2;
-                     });
-                 var node = svg.selectAll(".node")
-                     .data(graph.nodes)
-                     .enter().append("circle")
-                     .attr("class", "node")
-                     .attr("r", function(s) {
-                         //return Math.sqrt(s.value) + 1
-                         return 5
-                     })
-                     .style("fill", function(d) {
-                         return color(Math.floor(Math.random()*10) + 1);
-                     })
-                     .call(force.drag);
-                 node.append("title")
-                     .text(function(d) {
-                         return d.name;
-                     });
-                 force.on("tick", function() {
-                     link.attr("x1", function(d) {
-                             return d.source.x;
-                         })
-                         .attr("y1", function(d) {
-                             return d.source.y;
-                         })
-                         .attr("x2", function(d) {
-                             return d.target.x;
-                         })
-                         .attr("y2", function(d) {
-                             return d.target.y;
-                         });
-                     node.attr("cx", function(d) {
-                             return d.x;
-                         })
-                         .attr("cy", function(d) {
-                             return d.y;
-                         });
-                 });
-             });
+    if (error) {
+        throw error;
+    }
+    var width = window.innerWidth - 20,
+        height = window.innerHeight - 20;
+    var color = d3.scale.category20();
+    var force = d3.layout.force()
+        .charge(-80)
+        .linkDistance(30)
+        .size([width, height]);
+    var svg = d3.select("body").append("svg")
+        .attr("width", width)
+        .attr("height", height);
+    var graph = root;
+    var nodeMap = {};
+    graph.nodes.forEach(function(d) {
+        nodeMap[d.name] = d;
+    });
+    graph.links.forEach(function(l) {
+        l.source = nodeMap[l.source];
+        l.target = nodeMap[l.target];
+    })
+    force.nodes(graph.nodes)
+        .links(graph.links)
+        .start();
+    var link = svg.selectAll(".link")
+        .data(graph.links)
+        .enter().append("line")
+        .attr("class", "link")
+        .style("stroke-width", function(d) {
+            return 2;
+        });
+    var node = svg.selectAll(".node")
+        .data(graph.nodes)
+        .enter().append("circle")
+        .attr("class", "node")
+        .attr("r", function(d) {
+            if (d.weight < 5) {
+                return 4;
+            } else {
+                return d.weight * 1.2;
+            }
+        })
+        .style("fill", function(d) {
+            return color(Math.floor(Math.random() * 10) + 1);
+        })
+        .call(force.drag);
+    node.append("title")
+        .text(function(d) {
+            return d.name;
+        });
+    force.on("tick", function() {
+        link.attr("x1", function(d) {
+                return d.source.x;
+            })
+            .attr("y1", function(d) {
+                return d.source.y;
+            })
+            .attr("x2", function(d) {
+                return d.target.x;
+            })
+            .attr("y2", function(d) {
+                return d.target.y;
+            });
+        node.attr("cx", function(d) {
+                return d.x;
+            })
+            .attr("cy", function(d) {
+                return d.y;
+            });
+    });
+});
         </script>
         <div class="fixed-action-btn " style="bottom: 45px; right: 24px;">
             <a class="btn-floating btn-large blue hoverable" href="http://milesbudden.com/">
