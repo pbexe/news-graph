@@ -67,7 +67,6 @@ def chunk(sentence):
 def keywords(text):
 	sentences = prepareForNLP(text)
 	for sentence in sentences:
-		#chunk(sentence)
 		for kw in chunk(sentence):
 			yield kw
 
@@ -79,22 +78,22 @@ def makeEdges(nodes, story):
 			for i in nodes:
 				edge = Edge(source=story,origin=node,destination=i)
 				edge.save()
-				print(edge)
 		else:
 			break
 
 def addStory(story):
-	print("Adding story:", story[1])
+	print("Adding story:", story[0])
 	s = Story(source=story[0], content=story[1])
 	s.save()
-	DBalready = []
 	nodes = []
 	for kw in keywords(story[1]):
-		if kw not in DBalready:
-			DBalready.append(kw)
+		if len(Node.objects.filter(name=kw)) < 1:
 			node = Node(name=kw,date=timezone.now(),collectedFrom=s)
-			nodes.append(node)
 			node.save()
+		else:
+			print("KW already in DB")
+			node = Node.objects.filter(name=kw)[0]
+		nodes.append(node)
 	makeEdges(nodes, story)
 
 # Updates the DB to a more recent version of the news
