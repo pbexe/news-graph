@@ -4,11 +4,12 @@
 <head>
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <!--Import Google Icon Font-->
-    <link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
+    <link rel="stylesheet" href="//cdn.materialdesignicons.com/1.4.57/css/materialdesignicons.min.css">
     <!-- Compiled and minified CSS -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
+    <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
     <!-- Compiled and minified JavaScript -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
     <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
     <meta charset='utf-8'>
     <title>Force layout test</title>
@@ -37,7 +38,6 @@
 </head>
 
 <body>
-    <script src='http://d3js.org/d3.v3.min.js'></script>
     <script>
         d3.json("/relationships/ajax/", function(error, root) {
             if (error) {
@@ -125,11 +125,16 @@
             });
         });
     </script>
-    <div class="fixed-action-btn " style="bottom: 45px; right: 24px;">
-        <a class="btn-floating btn-large blue hoverable" href="http://milesbudden.com/">
-            <i class="large material-icons">info_outline</i>
-        </a>
-    </div>
+   <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+    <a class="btn-floating btn-large red">
+      <i class="large mdi-navigation-menu"></i>
+    </a>
+    <ul>
+      <li><a class="btn-floating red" href="https://github.com/pbexe/news-graph"><i class="material-icons">code</i></i></a></li>
+      <li><a class="btn-floating blue" href="http://milesbudden.com/"><i class="material-icons">person_pin</i></a></li>
+      <li><a class="btn-floating green " href="https://github.com/pbexe/news-graph/archive/master.zip"><i class="material-icons">file_download</i></a></li>
+    </ul>
+  </div>
     <div style="bottom: 24px; left: 24px;position: absolute;">
         <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="//www.redditstatic.com/spreddit1.gif" alt="submit to reddit" border="0" /> </a>
     </div>
