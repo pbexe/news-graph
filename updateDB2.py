@@ -91,7 +91,7 @@ def addStory(story):
 			node = Node(name=kw,date=timezone.now(),collectedFrom=s)
 			node.save()
 		else:
-			print("KW already in DB")
+			# print("KW already in DB")
 			node = Node.objects.filter(name=kw)[0]
 		nodes.append(node)
 	makeEdges(nodes, story)
@@ -105,7 +105,7 @@ def updateDB():
 		# If the story isn't in the database
 		if len(matches) == 0:
 			addStory(story)
-		else: print("Already in DB")
+		else: pass # print("Already in DB")
 
 if __name__ == "__main__":
 	print("Updating DB")

@@ -29,7 +29,8 @@
             text-align: center;
             padding: 5px;
             font: 8px;
-            background: lightblue;
+            color: #ffffff;
+            background: #2e2e2e;
             border: 0px;
             border-radius: 8px 8px 8px 0px;
             pointer-events: none;
@@ -82,16 +83,19 @@
                 .on("mouseover", function(d) {
                     div.transition()
                         .duration(100)
-                        .style("opacity", 1);
+                        .style("opacity", .8);
                     div.html(d.name)
-                        .style("left", (d3.event.pageX) +5 + "px")
-                        .style("top", (d3.event.pageY) -40 + "px");
+                        .style("left", (d.x) +5 + "px")
+                        .style("top", (d.y) -40 + "px");
                 })
                 .on("mouseout", function(d) {
                     div.transition()
-                        .duration(200)
+                        .duration(0)
                         .style("opacity", 0);
                 })
+                .on("mousedown", function(d) { div.transition()
+                        .duration(400)
+                        .style("opacity", 0); })
                 .attr("r", function(d) {
                     if (d.weight < 5) {
                         return 4;
@@ -135,9 +139,6 @@
       <li><a class="btn-floating green " href="https://github.com/pbexe/news-graph/archive/master.zip"><i class="material-icons">file_download</i></a></li>
     </ul>
   </div>
-    <div style="bottom: 24px; left: 24px;position: absolute;">
-        <a href="//www.reddit.com/submit" onclick="window.location = '//www.reddit.com/submit?url=' + encodeURIComponent(window.location); return false"> <img src="//www.redditstatic.com/spreddit1.gif" alt="submit to reddit" border="0" /> </a>
-    </div>
 </body>
 
 </html>
