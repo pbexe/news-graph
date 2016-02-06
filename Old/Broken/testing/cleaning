@@ -1,2 +1,0 @@
-import nltk
-%timeit nltk.clean_html("sdfgdsf")
