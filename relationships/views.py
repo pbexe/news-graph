@@ -9,14 +9,16 @@ def ajax(request):
 	nodeList = []
 	edgeList = []
 	for node in nodes:
-		tempDict = {}
-		tempDict['name'] = node.name
-		nodeList.append(tempDict)
+		if node.recent():
+			tempDict = {}
+			tempDict['name'] = node.name
+			nodeList.append(tempDict)
 	for edge in edges:
-		tempDict = {}
-		tempDict['source'] = edge.origin.name
-		tempDict['target'] = edge.destination.name
-		edgeList.append(tempDict)
+		if edge.recent:
+			tempDict = {}
+			tempDict['source'] = edge.origin.name
+			tempDict['target'] = edge.destination.name
+			edgeList.append(tempDict)
 	jsonOut = {}
 	jsonOut['nodes'] = nodeList
 	jsonOut['links'] = edgeList
