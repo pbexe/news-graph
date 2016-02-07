@@ -107,6 +107,12 @@
                     return color(Math.floor(Math.random() * 10) + 1);
                 })
                 .call(force.drag);
+
+node.append("svg:text")
+  .text(function(d) {return d.name;})
+  .attr("x", function(d) {return d.x;})
+  .attr("y", function(d) {return d.y;});
+                
             force.on("tick", function() {
                 link.attr("x1", function(d) {
                         return d.source.x;

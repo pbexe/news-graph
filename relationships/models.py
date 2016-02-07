@@ -12,8 +12,9 @@ class Story(models.Model):
     source = models.URLField(max_length=1000)
     # The content of the news article
     content = models.TextField()
+    date = models.DateTimeField('Date Collected', default=timezone.now)
     def recent(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=7)
+        return self.date >= timezone.now() - datetime.timedelta(days=5)
     # A function to return the source of the news article when called
     def __str__(self):
         return self.source
@@ -27,7 +28,7 @@ class Node(models.Model):
     # The news story that the node was  extracted from
     collectedFrom = models.ForeignKey(Story, related_name='story_collected_from', default="")
     def recent(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=7)
+        return self.date >= timezone.now() - datetime.timedelta(days=5)
     # A function to return the name of the node when called
     def __str__(self):
         return self.name
@@ -40,8 +41,9 @@ class Edge(models.Model):
     origin = models.ForeignKey(Node, related_name='origin_node')
     # The node at which the edge ends
     destination = models.ForeignKey(Node, related_name='destination_node')
+    date = models.DateTimeField('Date Collected', default=timezone.now)
     def recent(self):
-        return self.pub_date >= timezone.now() - datetime.timedelta(days=7)
+        return self.date >= timezone.now() - datetime.timedelta(days=5)
     # A function to return the 2 nodes the edge joins when called
     def __str__(self):
         return str(self.origin) + " -> " + str(self.destination)
