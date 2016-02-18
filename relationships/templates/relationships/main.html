@@ -2,117 +2,179 @@
 <html>
 
 <head>
-    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <!--Import Google Icon Font-->
     <link href="//fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     <link rel="stylesheet" href="//cdn.materialdesignicons.com/1.4.57/css/materialdesignicons.min.css">
     <!-- Compiled and minified CSS -->
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/css/materialize.min.css">
-    <!-- Compiled and minified JavaScript -->
-    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
-    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <meta charset='utf-8'>
     <title>Force layout test</title>
     <style>
-        .node {
-            stroke: #fff;
-            stroke-width: 1.5px;
-        }
-        
-        .link {
-            stroke: #999;
-            stroke-opacity: .6;
-        }
-        
-        div.tooltip {
-            position: absolute;
-            text-align: center;
-            padding: 5px;
-            font: 8px;
-            color: #ffffff;
-            background: #2e2e2e;
-            border: 0px;
-            border-radius: 8px 8px 8px 0px;
-            pointer-events: none;
-        }
+    html,
+    body {
+        margin: 0;
+        height: 100%;
+        overflow-y: hidden;
+    }
+    
+    .node {
+        stroke: #fff;
+        stroke-width: 1.5px;
+    }
+    
+    .link {
+        stroke: #999;
+        stroke-opacity: .6;
+    }
+    
+    div.tooltip {
+        position: absolute;
+        text-align: center;
+        padding: 5px;
+        font: 8px;
+        color: #ffffff;
+        background: #2e2e2e;
+        border: 0px;
+        border-radius: 8px 8px 8px 0px;
+        pointer-events: none;
+    }
+    
+    .node-text {
+        color: #888;
+        paint-order: stroke;
+        stroke: #fff;
+        stroke-width: .5px;
+        stroke-linecap: butt;
+        stroke-linejoin: miter;
+        font-weight: 800;
+    }
     </style>
 </head>
 
 <body>
     <script>
+    // When the document is ready
+    $(document).ready(function() {
+        // Get the JSON
         d3.json("/relationships/ajax/", function(error, root) {
+            // If there is an error, throw it
             if (error) {
                 throw error;
             }
+            // Sizes of the force directed graph
             var width = window.innerWidth - 20,
                 height = window.innerHeight - 20;
+            // Make a colour scheme with 20 colours
             var color = d3.scale.category20();
+            // Create the force directed graph
             var force = d3.layout.force()
-                .charge(-80)
-                .linkDistance(30)
+                // Set the charge between nodes
+                .charge(-120)
+                // Set the link distance
+                .linkDistance(40)
+                // Apply the size to the graph
                 .size([width, height]);
+            // Create the master SVG element
             var svg = d3.select("body").append("svg")
-                .attr("width", width)
-                .attr("height", height);
+                // Make it full screen
+                .attr("width", "100%")
+                .attr("height", "100%")
+                // Create a viewport for panning
+                .attr("viewBox", "0 0 " + width + " " + height)
+                // Don't let it squish for legacy browsers
+                .attr("preserveAspectRatio", "xMidYMid meet")
+                // Enable pointer-events for the SVG
+                .attr("pointer-events", "all")
+                // Call the zoom function when the user zooms
+                .call(d3.behavior.zoom().on("zoom", redraw));
+            // Create the "visible" area
+            var vis = svg
+                .append('svg:g');
+            // Redraw after panning
+            function redraw() {
+                vis.attr("transform",
+                    "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
+            }
+            // Create tooltips
             var div = d3.select("body").append("div")
                 .attr("class", "tooltip card")
                 .style("opacity", 0);
+            // Get the data from the json
             var graph = root;
+            // Build the data structure
             var nodeMap = {};
             graph.nodes.forEach(function(d) {
                 nodeMap[d.name] = d;
             });
             graph.links.forEach(function(l) {
-                l.source = nodeMap[l.source];
-                l.target = nodeMap[l.target];
-            })
+                    l.source = nodeMap[l.source];
+                    l.target = nodeMap[l.target];
+                })
+                // Make the links
             force.nodes(graph.nodes)
                 .links(graph.links)
                 .start();
-            var link = svg.selectAll(".link")
+            // Define what the links are
+            var link = vis.selectAll(".link")
                 .data(graph.links)
+                // They are lines!
                 .enter().append("line")
+                // Add it to the css link class
                 .attr("class", "link")
+                // Make the stroke width 2
                 .style("stroke-width", function(d) {
                     return 2;
                 });
-            var node = svg.selectAll(".node")
+            // Define what the nodes are
+            var node = vis.selectAll(".node")
                 .data(graph.nodes)
-                .enter().append("circle")
+                // Create a container for each node
+                .enter().append("g")
+                .call(force.drag);
+            // Append a circle to each node
+            node.append("circle")
+                // Give it a class of circle
                 .attr("class", "node")
-                .on("mouseover", function(d) {
-                    div.transition()
-                        .duration(100)
-                        .style("opacity", .8);
-                    div.html(d.name)
-                        .style("left", (d.x) +5 + "px")
-                        .style("top", (d.y) -40 + "px");
+                // Give it a title
+                .attr("title", function(d) {
+                    return d.name;
                 })
-                .on("mouseout", function(d) {
-                    div.transition()
-                        .duration(0)
-                        .style("opacity", 0);
-                })
-                .on("mousedown", function(d) { div.transition()
-                        .duration(400)
-                        .style("opacity", 0); })
+                // Give it a radius based off the weight
                 .attr("r", function(d) {
                     if (d.weight < 5) {
                         return 4;
                     } else {
-                        return d.weight * 1.2;
+                        return d.weight;
                     }
                 })
+                // Give it a random colour
                 .style("fill", function(d) {
                     return color(Math.floor(Math.random() * 10) + 1);
                 })
-                .call(force.drag);
-
-node.append("svg:text")
-  .text(function(d) {return d.name;})
-  .attr("x", function(d) {return d.x;})
-  .attr("y", function(d) {return d.y;});
-                
+                // Allow dragging instead of panning
+            var drag = force.drag()
+                .on("dragstart", function(d) {
+                    d3.event.sourceEvent.stopPropagation();
+                });
+            // Add the text to each node
+            node.append("text")
+                // Add it to a CSS class
+                .attr("class", "node-text")
+                // Set the font size to the weight
+                .attr("font-size", function(d) {
+                    if (d.weight < 5) {
+                        return 5
+                    } else {
+                        return d.weight * 1.2
+                    }
+                })
+                // Centre align the text
+                .attr("text-anchor", "middle")
+                .attr("alignment-baseline", "middle")
+                // Set the text
+                .text(function(d) {
+                    return d.name
+                });
+            // Physics for each tick
             force.on("tick", function() {
                 link.attr("x1", function(d) {
                         return d.source.x;
@@ -126,25 +188,29 @@ node.append("svg:text")
                     .attr("y2", function(d) {
                         return d.target.y;
                     });
-                node.attr("cx", function(d) {
-                        return d.x;
-                    })
-                    .attr("cy", function(d) {
-                        return d.y;
-                    });
+                node.attr("transform", function(d) {
+                    return "translate(" + d.x + "," + d.y + ")";
+                });
             });
         });
+
+
+    });
     </script>
-   <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
-    <a class="btn-floating btn-large red">
-      <i class="large mdi-navigation-menu"></i>
-    </a>
-    <ul>
-      <li><a class="btn-floating red" href="https://github.com/pbexe/news-graph"><i class="material-icons">code</i></i></a></li>
-      <li><a class="btn-floating blue" href="http://milesbudden.com/"><i class="material-icons">person_pin</i></a></li>
-      <li><a class="btn-floating green " href="https://github.com/pbexe/news-graph/archive/master.zip"><i class="material-icons">file_download</i></a></li>
-    </ul>
-  </div>
+    <div class="fixed-action-btn horizontal click-to-toggle" style="bottom: 45px; right: 24px;">
+        <a class="btn-floating btn-large red">
+            <i class="large mdi-navigation-menu"></i>
+        </a>
+        <ul>
+            <li><a class="btn-floating red" href="https://github.com/pbexe/news-graph"><i class="material-icons">code</i></i></a></li>
+            <li><a class="btn-floating blue" href="http://milesbudden.com/"><i class="material-icons">person_pin</i></a></li>
+            <li><a class="btn-floating green " href="https://github.com/pbexe/news-graph/archive/master.zip"><i class="material-icons">file_download</i></a></li>
+        </ul>
+    </div>
+    <!-- Compiled and minified JavaScript -->
+    <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
+    <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
 </body>
 
 </html>
