@@ -72,9 +72,9 @@
             // Create the force directed graph
             var force = d3.layout.force()
                 // Set the charge between nodes
-                .charge(-120)
+                .charge(-200)
                 // Set the link distance
-                .linkDistance(40)
+                .linkDistance(30)
                 // Apply the size to the graph
                 .size([width, height]);
             // Create the master SVG element
@@ -144,10 +144,10 @@
                 })
                 // Give it a radius based off the weight
                 .attr("r", function(d) {
-                    if (d.weight < 5) {
+                    if (d.weight < 8 && d.weight != 0) {
                         return 4;
                     } else {
-                        return d.weight;
+                        return d.weight * 0.5;
                     }
                 })
                 // Give it a random colour
@@ -165,10 +165,10 @@
                 .attr("class", "node-text")
                 // Set the font size to the weight
                 .attr("font-size", function(d) {
-                    if (d.weight < 5) {
-                        return 5
+                    if (d.weight < 8 && d.weight != 0) {
+                        return 4
                     } else {
-                        return d.weight * 1.2
+                        return d.weight * 0.5
                     }
                 })
                 // Centre align the text
