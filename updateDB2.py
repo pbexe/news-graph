@@ -71,6 +71,7 @@ def keywords(text):
 			yield kw
 
 def makeEdges(nodes, story):
+	print("3:", story)
 	while True:
 		if len(nodes) > 0:
 			node = nodes[0]
@@ -94,7 +95,7 @@ def addStory(story):
 			# print("KW already in DB")
 			node = Node.objects.filter(name=kw)[0]
 		nodes.append(node)
-	makeEdges(nodes, story)
+	makeEdges(nodes, story[0])
 
 # Updates the DB to a more recent version of the news
 def updateDB():
@@ -105,6 +106,7 @@ def updateDB():
 		# If the story isn't in the database
 		if len(matches) == 0:
 			addStory(story)
+			print("1:", story)
 		else: pass # print("Already in DB")
 
 if __name__ == "__main__":

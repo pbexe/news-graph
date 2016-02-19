@@ -18,6 +18,7 @@ def ajax(request):
 			tempDict = {}
 			tempDict['source'] = edge.origin.name
 			tempDict['target'] = edge.destination.name
+			tempDict['origin'] = edge.source
 			edgeList.append(tempDict)
 	jsonOut = {}
 	jsonOut['nodes'] = nodeList

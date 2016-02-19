@@ -120,8 +120,14 @@
             // Define what the links are
             var link = vis.selectAll(".link")
                 .data(graph.links)
+                // Make it a link
+                .enter().append("a")
+                // Add the destination
+                .attr("xlink:href", function(d) {
+                    return d.origin;
+                })
                 // They are lines!
-                .enter().append("line")
+                .append("line")
                 // Add it to the css link class
                 .attr("class", "link")
                 // Make the stroke width 2
