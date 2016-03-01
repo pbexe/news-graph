@@ -43,7 +43,7 @@ class Edge(models.Model):
     destination = models.ForeignKey(Node, related_name='destination_node')
     date = models.DateTimeField('Date Collected', default=timezone.now)
     def recent(self):
-        return self.date >= timezone.now() - datetime.timedelta(days=5)
+        return self.origin.recent() and self.destination.recent()
     # A function to return the 2 nodes the edge joins when called
     def __str__(self):
         return str(self.origin) + " -> " + str(self.destination)

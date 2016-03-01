@@ -14,15 +14,16 @@ def ajax(request):
 			tempDict['name'] = node.name
 			nodeList.append(tempDict)
 	for edge in edges:
-		if edge.recent:
+		if edge.recent():
 			tempDict = {}
 			tempDict['source'] = edge.origin.name
 			tempDict['target'] = edge.destination.name
 			tempDict['origin'] = edge.source
 			edgeList.append(tempDict)
 	jsonOut = {}
-	jsonOut['nodes'] = nodeList
 	jsonOut['links'] = edgeList
+	jsonOut['nodes'] = nodeList
+	
 	return HttpResponse(json.dumps(jsonOut))
 
 def index(request):
