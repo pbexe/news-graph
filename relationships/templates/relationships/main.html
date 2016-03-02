@@ -110,7 +110,7 @@
         graph.links.forEach(function(l) {
                 l.source = nodeMap[l.source];
                 l.target = nodeMap[l.target];
-                l.origin = nodeMap[l.origin];
+
             })
             // Make the links
         force.nodes(graph.nodes)
@@ -123,6 +123,7 @@
             .enter().append("a")
             // Add the destination
             .attr("xlink:href", function(d) {
+                console.log(d)
                 return d.origin;
             })
             // They are lines!
