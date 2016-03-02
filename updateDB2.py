@@ -92,6 +92,7 @@ def addStory(story):
 			node.save()
 		else:
 			node = Node.objects.filter(name=kw)[0]
+			node.date = timezone.now()
 		nodes.append(node)
 	makeEdges(nodes, story[0])
 
