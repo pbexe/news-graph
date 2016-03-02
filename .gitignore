@@ -185,9 +185,10 @@ Backup*/
 UpgradeLog*.XML
 UpgradeLog*.htm
 
-# SQL Server files
+# SQL files
 *.mdf
 *.ldf
+*.sqlite3
 
 # Business Intelligence projects
 *.rdl.data
