@@ -123,7 +123,7 @@
             .enter().append("a")
             // Add the destination
             .attr("xlink:href", function(d) {
-                console.log(d)
+
                 return d.origin;
             })
             // They are lines!
@@ -150,10 +150,11 @@
             })
             // Give it a radius based off the weight
             .attr("r", function(d) {
-                if (d.weight < 8 && d.weight != 0) {
-                    return 4;
+                console.log(d.name, d.weight)
+                if (d.weight < 4) {
+                    return 3;
                 } else {
-                    return d.weight * 0.5;
+                    return d.weight;
                 }
             })
             // Give it a random colour
@@ -171,10 +172,10 @@
             .attr("class", "node-text")
             // Set the font size to the weight
             .attr("font-size", function(d) {
-                if (d.weight < 8 && d.weight != 0) {
-                    return 4
+                if (d.weight < 4) {
+                    return 3
                 } else {
-                    return d.weight * 0.5
+                    return d.weight * 0.75
                 }
             })
             // Centre align the text
