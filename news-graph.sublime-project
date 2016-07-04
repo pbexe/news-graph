@@ -4,5 +4,6 @@
 		{
 			"path": "."
 		}
-	]
+	],
+	"virtualenv": "C:\\Users\\Miles\\Documents\\GitHub\\news-graph\\venv"
 }

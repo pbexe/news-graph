@@ -3,16 +3,51 @@
 	{
 		"selected_items":
 		[
+			[
+				"tra",
+				"trace2"
+			],
+			[
+				"neg",
+				"negTags"
+			],
+			[
+				"pos",
+				"posTags"
+			],
+			[
+				"all",
+				"all-corpora"
+			]
 		]
 	},
 	"buffers":
 	[
 		{
-			"file": "src/.gitignore",
+			"file": "src/updateDB.py",
 			"settings":
 			{
-				"buffer_size": 3141,
+				"buffer_size": 3131,
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "Testing/twitter.py",
+			"settings":
+			{
+				"buffer_size": 1445,
+				"line_ending": "Windows",
+				"name": "from nltk.corpus import twitter_samples"
+			}
+		},
+		{
+			"contents": "Python 2.7.11 (v2.7.11:6d1b6a68f775, Dec  5 2015, 20:32:19) [MSC v.1500 32 bit (Intel)] on win32\nType \"help\", \"copyright\", \"credits\" or \"license\" for more information.\n(InteractiveConsole)\n>>> import nltk\n>>> nltk.download(\"twitter_samples\")\n[nltk_data] Downloading package twitter_samples to\n[nltk_data]     C:\\Users\\Miles\\AppData\\Roaming\\nltk_data...\n[nltk_data]   Unzipping corpora\\twitter_samples.zip.\nTrue\n>>> ",
+			"settings":
+			{
+				"buffer_size": 415,
+				"line_ending": "Windows",
+				"name": "*REPL* [python]",
+				"scratch": true
 			}
 		}
 	],
@@ -39,10 +74,30 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 354.0,
-		"last_filter": "insta",
+		"height": 95.0,
+		"last_filter": "Virtualenv: SublimeREPL - Python",
 		"selected_items":
 		[
+			[
+				"Virtualenv: SublimeREPL - Python",
+				"Virtualenv: SublimeREPL - Python"
+			],
+			[
+				"insat",
+				"Package Control: Install Package"
+			],
+			[
+				"vi",
+				"Virtualenv: Activate"
+			],
+			[
+				"acti",
+				"Virtualenv: Activate"
+			],
+			[
+				"ins",
+				"Package Control: Install Package"
+			],
 			[
 				"insta",
 				"Package Control: Install Package"
@@ -79,11 +134,12 @@
 	[
 		"/C/Users/Miles/Documents/GitHub/news-graph",
 		"/C/Users/Miles/Documents/GitHub/news-graph/src",
-		"/C/Users/Miles/Documents/GitHub/news-graph/src/relationships",
-		"/C/Users/Miles/Documents/GitHub/news-graph/src/relationships/__pycache__"
+		"/C/Users/Miles/Documents/GitHub/news-graph/Testing"
 	],
 	"file_history":
 	[
+		"/C/Users/Miles/Downloads/twitter_test.py",
+		"/C/Users/Miles/Documents/GitHub/news-graph/news-graph.sublime-project",
 		"/C/Users/Miles/Documents/GitHub/news-graph/src/relationships/models.py",
 		"/C/Users/Miles/Documents/cs1v1/src/cs1v1/settings.py",
 		"/C/Users/Miles/Downloads/logconnections.sp",
@@ -143,6 +199,8 @@
 		"case_sensitive": false,
 		"find_history":
 		[
+			"posTags = {}",
+			"\\\\",
 			"reque",
 			"\">^</",
 			"\"></",
@@ -155,6 +213,7 @@
 		"regex": false,
 		"replace_history":
 		[
+			"/"
 		],
 		"reverse": false,
 		"show_context": true,
@@ -165,28 +224,249 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "src/.gitignore",
-					"semi_transient": true,
+					"file": "src/updateDB.py",
+					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 3141,
+						"buffer_size": 3131,
 						"regions":
 						{
 						},
 						"selection":
 						[
 							[
-								0,
-								0
+								1199,
+								1181
 							]
 						],
 						"settings":
 						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										1198,
+										1199
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										1193,
+										1194
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax",
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 792.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 2,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "Testing/twitter.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 1445,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								1199,
+								1199
+							]
+						],
+						"settings":
+						{
+							"auto_name": "from nltk.corpus import twitter_samples",
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+									"1":
+									[
+										1219,
+										1220
+									]
+								},
+								"open":
+								{
+									"1":
+									[
+										1175,
+										1176
+									]
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
+							],
+							"syntax": "Packages/Python/Python.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 1080.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				},
+				{
+					"buffer": 2,
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 415,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								415,
+								415
+							]
+						],
+						"settings":
+						{
+							"auto_complete": true,
+							"auto_indent": false,
 							"bracket_highlighter.busy": false,
 							"bracket_highlighter.locations":
 							{
@@ -202,31 +482,21 @@
 							},
 							"bracket_highlighter.regions":
 							[
-								"bh_curly",
-								"bh_curly_center",
-								"bh_curly_open",
-								"bh_curly_close",
-								"bh_curly_content",
-								"bh_tag",
-								"bh_tag_center",
-								"bh_tag_open",
-								"bh_tag_close",
-								"bh_tag_content",
 								"bh_unmatched",
 								"bh_unmatched_center",
 								"bh_unmatched_open",
 								"bh_unmatched_close",
 								"bh_unmatched_content",
-								"bh_double_quote",
-								"bh_double_quote_center",
-								"bh_double_quote_open",
-								"bh_double_quote_close",
-								"bh_double_quote_content",
 								"bh_single_quote",
 								"bh_single_quote_center",
 								"bh_single_quote_open",
 								"bh_single_quote_close",
 								"bh_single_quote_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
 								"bh_c_define",
 								"bh_c_define_center",
 								"bh_c_define_open",
@@ -237,34 +507,78 @@
 								"bh_angle_open",
 								"bh_angle_close",
 								"bh_angle_content",
-								"bh_default",
-								"bh_default_center",
-								"bh_default_open",
-								"bh_default_close",
-								"bh_default_content",
-								"bh_round",
-								"bh_round_center",
-								"bh_round_open",
-								"bh_round_close",
-								"bh_round_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content",
 								"bh_square",
 								"bh_square_center",
 								"bh_square_open",
 								"bh_square_close",
 								"bh_square_content",
-								"bh_regex",
-								"bh_regex_center",
-								"bh_regex_open",
-								"bh_regex_close",
-								"bh_regex_content"
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content"
 							],
-							"syntax": "Packages/Text/Plain text.tmLanguage"
+							"default_dir": "C:\\Users\\Miles\\Documents\\GitHub\\news-graph",
+							"detect_indentation": false,
+							"gutter": false,
+							"history_arrows": true,
+							"indent_subsequent_lines": false,
+							"line_numbers": false,
+							"repl": true,
+							"repl_external_id": "python",
+							"repl_id": "b180eca69d9b45ec848714a398637604",
+							"repl_restart_args":
+							{
+								"autocomplete_server": true,
+								"cmd":
+								[
+									"python",
+									"-u",
+									"${packages}/SublimeREPL/config/Python/ipy_repl.py"
+								],
+								"cwd": "$file_path",
+								"encoding": "utf8",
+								"extend_env":
+								{
+									"PATH": "C:\\Users\\Miles\\Documents\\GitHub\\news-graph\\venv\\Scripts;C:\\Python27\\;C:\\Python27\\Scripts;C:\\Program Files (x86)\\iis express\\PHP\\v5.4;C:\\ProgramData\\Oracle\\Java\\javapath;C:\\Program Files (x86)\\NVIDIA Corporation\\PhysX\\Common;C:\\Windows\\system32;C:\\Windows;C:\\Windows\\System32\\Wbem;C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\AMD\\ATI.ACE\\Core-Static;C:\\Program Files\\nodejs\\;C:\\Users\\Miles\\.dnx\\bin;C:\\Program Files\\Microsoft DNX\\Dnvm\\;C:\\Program Files (x86)\\Windows Kits\\8.1\\Windows Performance Toolkit\\;C:\\Program Files\\Git\\cmd;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files (x86)\\ATI Technologies\\ATI.ACE\\Core-Static;C:\\Users\\Miles\\AppData\\Local\\Programs\\Python\\Python35-32\\Scripts\\;C:\\Users\\Miles\\AppData\\Local\\Programs\\Python\\Python35-32\\;C:\\Users\\Miles\\AppData\\Roaming\\npm;C:\\Program Files (x86)\\pdfToHTML;C:\\python27;C:\\Program Files (x86)\\Microsoft VS Code\\bin;C:\\Program Files\\MySQL\\MySQL Server 5.1\\bin;C:\\Program Files\\Common Files\\Autodesk Shared\\;C:\\WINDOWS\\system32;C:\\WINDOWS;C:\\WINDOWS\\System32\\Wbem;C:\\WINDOWS\\System32\\WindowsPowerShell\\v1.0\\;C:\\Program Files\\Redis\\;C:\\Program Files (x86)\\Heroku\\bin;C:\\Program Files (x86)\\git\\cmd;C:\\Program Files (x86)\\Skype\\Phone\\;C:\\Program Files (x86)\\Windows Live\\Shared;C:\\Program Files (x86)\\Brackets\\command;C:\\Users\\Miles\\AppData\\Local\\Programs\\Python\\Python35-32\\Scripts\\;C:\\Users\\Miles\\AppData\\Local\\Programs\\Python\\Python35-32\\;C:\\Users\\Miles\\AppData\\Roaming\\npm;C:\\Program Files (x86)\\pdfToHTML;C:\\Program Files\\7-Zip;C:\\Program Files\\MongoDB\\Server\\3.2\\bin;C:\\Python34\\Scripts;C:\\Users\\Miles\\AppData\\Local\\Pandoc\\;C:\\Program Files (x86)\\Google\\google_appengine\\;C:\\Python34",
+									"PYTHONIOENCODING": "utf-8",
+									"VIRTUAL_ENV": "C:\\Users\\Miles\\Documents\\GitHub\\news-graph\\venv"
+								},
+								"external_id": "python",
+								"syntax": "Packages/Python/Python.tmLanguage",
+								"type": "subprocess"
+							},
+							"repl_sublime2": false,
+							"smart_indent": false,
+							"spell_check": false,
+							"syntax": "Packages/Python/Python.tmLanguage",
+							"translate_tabs_to_spaces": false
 						},
 						"translation.x": 0.0,
 						"translation.y": 0.0,
 						"zoom_level": 1.0
 					},
-					"stack_index": 0,
+					"stack_index": 1,
 					"type": "text"
 				}
 			]
@@ -303,7 +617,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 189.0
+		"height": 212.0
 	},
 	"output.find_results":
 	{
@@ -313,11 +627,11 @@
 	{
 		"height": 174.0
 	},
-	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"pinned_build_system": "Packages/Virtualenv/Python + Virtualenv.sublime-build",
 	"project": "news-graph.sublime-project",
 	"replace":
 	{
-		"height": 58.0
+		"height": 114.0
 	},
 	"save_all_on_build": true,
 	"select_file":
@@ -355,7 +669,7 @@
 	"show_open_files": false,
 	"show_tabs": true,
 	"side_bar_visible": true,
-	"side_bar_width": 178.0,
+	"side_bar_width": 254.0,
 	"status_bar_visible": true,
 	"template_settings":
 	{
