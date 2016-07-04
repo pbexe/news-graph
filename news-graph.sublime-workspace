@@ -1,0 +1,363 @@
+{
+	"auto_complete":
+	{
+		"selected_items":
+		[
+		]
+	},
+	"buffers":
+	[
+		{
+			"file": "src/.gitignore",
+			"settings":
+			{
+				"buffer_size": 3141,
+				"line_ending": "Windows"
+			}
+		}
+	],
+	"build_system": "Packages/Python/Python.sublime-build",
+	"build_system_choices":
+	[
+		[
+			[
+				[
+					"Packages/Python/Python.sublime-build",
+					""
+				],
+				[
+					"Packages/Python/Python.sublime-build",
+					"Syntax Check"
+				]
+			],
+			[
+				"Packages/Python/Python.sublime-build",
+				""
+			]
+		]
+	],
+	"build_varint": "",
+	"command_palette":
+	{
+		"height": 354.0,
+		"last_filter": "insta",
+		"selected_items":
+		[
+			[
+				"insta",
+				"Package Control: Install Package"
+			],
+			[
+				"inst",
+				"Package Control: Install Package"
+			],
+			[
+				"form",
+				"CodeFormatter: Format Code"
+			]
+		],
+		"width": 446.0
+	},
+	"console":
+	{
+		"height": 126.0,
+		"history":
+		[
+			"import urllib.request,os,hashlib; h = '2915d1851351e5ee549c20394736b442' + '8bc59f460fa1548d1514676163dafc88'; pf = 'Package Control.sublime-package'; ipp = sublime.installed_packages_path(); urllib.request.install_opener( urllib.request.build_opener( urllib.request.ProxyHandler()) ); by = urllib.request.urlopen( 'http://packagecontrol.io/' + pf.replace(' ', '%20')).read(); dh = hashlib.sha256(by).hexdigest(); print('Error validating download (got %s instead of %s), please try manual install' % (dh, h)) if dh != h else open(os.path.join( ipp, pf), 'wb' ).write(by)"
+		]
+	},
+	"distraction_free":
+	{
+		"menu_visible": true,
+		"show_minimap": false,
+		"show_open_files": false,
+		"show_tabs": false,
+		"side_bar_visible": false,
+		"status_bar_visible": false
+	},
+	"expanded_folders":
+	[
+		"/C/Users/Miles/Documents/GitHub/news-graph",
+		"/C/Users/Miles/Documents/GitHub/news-graph/src",
+		"/C/Users/Miles/Documents/GitHub/news-graph/src/relationships",
+		"/C/Users/Miles/Documents/GitHub/news-graph/src/relationships/__pycache__"
+	],
+	"file_history":
+	[
+		"/C/Users/Miles/Documents/GitHub/news-graph/src/relationships/models.py",
+		"/C/Users/Miles/Documents/cs1v1/src/cs1v1/settings.py",
+		"/C/Users/Miles/Downloads/logconnections.sp",
+		"/C/Users/Miles/Downloads/GPLv2.txt",
+		"/C/Users/Miles/Documents/GitHub/news-graph/src/relationships/views.py",
+		"/C/Users/Miles/Documents/GitHub/news-graph/src/updateDB.py",
+		"/C/Users/Miles/Downloads/tweets.txt",
+		"/C/Users/Miles/Downloads/output.aux",
+		"/C/Users/Miles/Documents/GitHub/news-graph/relationships/templates/relationships/main.html",
+		"/C/Users/Miles/Documents/GitHub/news-graph/runtime.txt",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-1/27_Jun_2016.txt",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-1/26_Jun_2016.txt",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-1/csgo-server.cfg",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-1/25_Jun_2016.txt",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-2/24_Jun_2016.txt",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-2/23_Jun_2016.txt",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-2/mapcycle.txt",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-1/csgoserver",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-1/maplists.cfg",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-1/databases.cfg",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-1/admins.cfg",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-1/core.cfg",
+		"/C/Users/Miles/Downloads/retakes_0.3.2/cfg/sourcemod/retakes/retakes_game.cfg",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-1/admins_simple.ini",
+		"/C/Users/Miles/AppData/Local/Temp/fz3temp-1/retakes_game.cfg",
+		"/C/Users/Miles/AppData/Local/Temp/Temp1_retakes_0.3.2.zip/README.md",
+		"/C/Users/Miles/Downloads/sourcemod-1.8.0-git5912-linux.tar/addons/sourcemod/configs/admins_simple.ini",
+		"/C/Users/Miles/Downloads/xml",
+		"/C/Users/Miles/AppData/Roaming/Sublime Text 3/Packages/Default/Preferences.sublime-settings",
+		"/C/Users/Miles/Google Drive/ipLogs/ip.py",
+		"/C/Users/Miles/AppData/Local/Temp/scp49582/home/csgoserver/serverfiles/csgo/addons/sourcemod/configs/admins_simple.ini",
+		"/C/Users/Miles/Downloads/asdasdasd.html",
+		"/C/Users/Miles/Google Drive/ipLogs/2016-06-09-21-48-39",
+		"/C/Users/Miles/AppData/Roaming/Sublime Text 3/Packages/Emmet/Emmet.sublime-settings",
+		"/C/Users/Miles/AppData/Roaming/Sublime Text 3/Packages/User/Distraction Free.sublime-settings",
+		"/C/Users/Miles/Google Drive/ipLogs/2016-06-09-18-14-45",
+		"/C/Users/Miles/Google Drive/ipLogs/2016-06-09-18-19-26",
+		"/C/Users/Miles/AppData/Roaming/Sublime Text 3/Packages/CodeFormatter/Default (Windows).sublime-keymap",
+		"/C/Users/Miles/AppData/Roaming/Sublime Text 3/Packages/CodeFormatter/CodeFormatter.sublime-settings",
+		"/C/Users/Miles/AppData/Roaming/Sublime Text 3/Packages/User/Preferences.sublime-settings",
+		"/C/Users/Miles/Documents/GitHub/news-graph/updateDB2.py"
+	],
+	"find":
+	{
+		"height": 70.0
+	},
+	"find_in_files":
+	{
+		"height": 158.0,
+		"where_history":
+		[
+			""
+		]
+	},
+	"find_state":
+	{
+		"case_sensitive": false,
+		"find_history":
+		[
+			"reque",
+			"\">^</",
+			"\"></",
+			"li",
+			"\\\\"
+		],
+		"highlight": true,
+		"in_selection": false,
+		"preserve_case": false,
+		"regex": false,
+		"replace_history":
+		[
+		],
+		"reverse": false,
+		"show_context": true,
+		"use_buffer2": true,
+		"whole_word": false,
+		"wrap": true
+	},
+	"groups":
+	[
+		{
+			"selected": 0,
+			"sheets":
+			[
+				{
+					"buffer": 0,
+					"file": "src/.gitignore",
+					"semi_transient": true,
+					"settings":
+					{
+						"buffer_size": 3141,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								0,
+								0
+							]
+						],
+						"settings":
+						{
+							"bracket_highlighter.busy": false,
+							"bracket_highlighter.locations":
+							{
+								"close":
+								{
+								},
+								"open":
+								{
+								},
+								"unmatched":
+								{
+								}
+							},
+							"bracket_highlighter.regions":
+							[
+								"bh_curly",
+								"bh_curly_center",
+								"bh_curly_open",
+								"bh_curly_close",
+								"bh_curly_content",
+								"bh_tag",
+								"bh_tag_center",
+								"bh_tag_open",
+								"bh_tag_close",
+								"bh_tag_content",
+								"bh_unmatched",
+								"bh_unmatched_center",
+								"bh_unmatched_open",
+								"bh_unmatched_close",
+								"bh_unmatched_content",
+								"bh_double_quote",
+								"bh_double_quote_center",
+								"bh_double_quote_open",
+								"bh_double_quote_close",
+								"bh_double_quote_content",
+								"bh_single_quote",
+								"bh_single_quote_center",
+								"bh_single_quote_open",
+								"bh_single_quote_close",
+								"bh_single_quote_content",
+								"bh_c_define",
+								"bh_c_define_center",
+								"bh_c_define_open",
+								"bh_c_define_close",
+								"bh_c_define_content",
+								"bh_angle",
+								"bh_angle_center",
+								"bh_angle_open",
+								"bh_angle_close",
+								"bh_angle_content",
+								"bh_default",
+								"bh_default_center",
+								"bh_default_open",
+								"bh_default_close",
+								"bh_default_content",
+								"bh_round",
+								"bh_round_center",
+								"bh_round_open",
+								"bh_round_close",
+								"bh_round_content",
+								"bh_square",
+								"bh_square_center",
+								"bh_square_open",
+								"bh_square_close",
+								"bh_square_content",
+								"bh_regex",
+								"bh_regex_center",
+								"bh_regex_open",
+								"bh_regex_close",
+								"bh_regex_content"
+							],
+							"syntax": "Packages/Text/Plain text.tmLanguage"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
+			]
+		}
+	],
+	"incremental_find":
+	{
+		"height": 31.0
+	},
+	"input":
+	{
+		"height": 69.0
+	},
+	"layout":
+	{
+		"cells":
+		[
+			[
+				0,
+				0,
+				1,
+				1
+			]
+		],
+		"cols":
+		[
+			0.0,
+			1.0
+		],
+		"rows":
+		[
+			0.0,
+			1.0
+		]
+	},
+	"menu_visible": true,
+	"output.exec":
+	{
+		"height": 189.0
+	},
+	"output.find_results":
+	{
+		"height": 0.0
+	},
+	"output.unsaved_changes":
+	{
+		"height": 174.0
+	},
+	"pinned_build_system": "Packages/Python/Python.sublime-build",
+	"project": "news-graph.sublime-project",
+	"replace":
+	{
+		"height": 58.0
+	},
+	"save_all_on_build": true,
+	"select_file":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_project":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"select_symbol":
+	{
+		"height": 0.0,
+		"last_filter": "",
+		"selected_items":
+		[
+		],
+		"width": 0.0
+	},
+	"selected_group": 0,
+	"settings":
+	{
+	},
+	"show_minimap": true,
+	"show_open_files": false,
+	"show_tabs": true,
+	"side_bar_visible": true,
+	"side_bar_width": 178.0,
+	"status_bar_visible": true,
+	"template_settings":
+	{
+	}
+}
