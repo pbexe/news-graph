@@ -26,20 +26,6 @@ for toks in tokenized:
 		else:
 			negTags[word[1]] = 1
 
-posX = []
-posY = []
-
-for key in posTags:
-	posX.append(key)
-	posY.append(posTags[key])
-
-negX = []
-negY = []
-
-for key in negTags:
-	negX.append(key)
-	negY.append(negTags[key])
-
 allTags = {}
 for tag in posTags:
 	if tag in negTags:
@@ -70,18 +56,12 @@ trace1 = go.Bar(
     y=Ynew,
     name='Tweets'
 )
-# trace2 = go.Bar(
-#     x=negX,
-#     y=negY,
-#     name='Negative Tweets'
-# )
-
 data = [trace1]
 layout = go.Layout(
     barmode='group'
 )
 
 fig = go.Figure(data=data, layout=layout)
-py.plot(fig, filename='grouped-bar')
+py.plot(fig, filename='twitter-sentiment-POS')
 
     
