@@ -5,6 +5,7 @@ from collections import Counter
 import plotly.plotly as py
 import plotly.graph_objs as go
 
+
 print twitter_samples.fileids()
 stop_words = set(stopwords.words('english'))
 negTweets = twitter_samples.strings('negative_tweets.json')

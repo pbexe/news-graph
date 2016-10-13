@@ -28,10 +28,24 @@ import nltk
 # Import the library needed to interact with the outputs
 import sys
 
+import praw
+
 def stories():
+    stories = []
     news = feedparser.parse('http://feeds.bbci.co.uk/news/rss.xml?edition=uk')
     for text in news.entries:
-        yield (text.link, text.description)
+        stories.append((text.link, text.description))
+    r = praw.Reddit(user_agent='Test Script by /u/bboe')
+    subreddits = ['news', 'worldnews','TrueNews','neutralnews']
+    for subreddit in subreddits:
+        submissions = r.get_subreddit(subreddit).get_top(limit=100)
+        for item in submissions:
+            stories.append((item.url, item.title))
+        submissions = r.get_subreddit(subreddit).get_hot(limit=100)
+        for item in submissions:
+            stories.append((item.url, item.title))
+    for item in stories:
+        yield item
 
 # Tokenizes the input so it can be analysed
 def prepareForNLP(text):
