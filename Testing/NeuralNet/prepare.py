@@ -7,6 +7,7 @@ from nltk.stem import WordNetLemmatizer
 import numpy
 import random
 
+print(twitter_samples.fileids())
 # Init the lemmatizer
 lemmatizer = WordNetLemmatizer()
 
@@ -32,23 +33,23 @@ def lexicon():
 
 def parse_sample(sample, sentiment, lexicon):
     oppinion_sentence_with_sentiment = []
-    with open(sample, 'r') as fp:
-        for line in fp.readlines():
-            line = word_tokenize(line.lower())
-            line = [lemmatizer.lemmatize(word) for word in line]
-            lexicon_mask = numpy.zeros(len(lexicon))
-            for word in line:
-                if word.lower() in lexicon:
-                    index_value = lexicon.index(word.lower())
-                    lexicon_mask[index_value] += 1
-            oppinion_sentence_with_sentiment.append([list(lexicon_mask), sentiment])
+    tweets = twitter_samples.strings(sample)
+    for line in tweets:
+        line = word_tokenize(line.lower())
+        line = [lemmatizer.lemmatize(word) for word in line]
+        lexicon_mask = numpy.zeros(len(lexicon))
+        for word in line:
+            if word.lower() in lexicon:
+                index_value = lexicon.index(word.lower())
+                lexicon_mask[index_value] += 1
+        oppinion_sentence_with_sentiment.append([list(lexicon_mask), sentiment])
     return oppinion_sentence_with_sentiment
 
 
 def create_training_data(lexicon):
     data = []
-    data += parse_sample('pos.txt', [1, 0], lexicon)
-    data += parse_sample('neg.txt', [0, 1], lexicon)
+    data += parse_sample('negative_tweets.json', [1, 0], lexicon)
+    data += parse_sample('positive_tweets.json', [0, 1], lexicon)
     random.shuffle(data)
     test_data = int(len(data)*0.1)
     x_training_data = []
