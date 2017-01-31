@@ -37,6 +37,7 @@ def generate(fp, lexicon):
                 lex[word] += 1
         total_pos_words = sum(lex.values())
         for key in lex:
+            print((lex[key] + 1) / (total_pos_words + len(lex)))
             lex[key] = (lex[key] + 1) / (total_pos_words + len(lex))
     return lex
 
