@@ -1,37 +1,11 @@
 # Import required libs
-from nltk.corpus import twitter_samples, stopwords
-from nltk.tokenize import word_tokenize
-import re
+from nltk.corpus import stopwords
 from collections import Counter
 from nltk.stem import WordNetLemmatizer
-import numpy
-import random
-import pickle
-from datadiff import diff
 
 # Init the lemmatizer
 lemmatizer = WordNetLemmatizer()
 
-
-# Build the lexicon
-def lexicon_old():
-    # Stop words to ignore
-    stop_words = set(stopwords.words('english'))
-    # Load the tweets
-    tweets = twitter_samples.strings('tweets.20150430-223406.json')
-    # Before and after filtering arrays
-    lexicon = []
-    lexicon_filtered = []
-    # Create list of words from data set
-    [[lexicon.append(lemmatizer.lemmatize(x)) for x in [w for w in word_tokenize(re.sub(r'RT |@\S*|#\S+|http\S+|\n-|w/|[\.]{2,}', '', tweet)) if w not in stop_words]] for tweet in tweets]
-    # Make each item unique
-    lexicon_frequency = Counter(lexicon)
-    for word in lexicon_frequency:
-        if (len(lexicon) * 0.8) > lexicon_frequency[word]:
-            lexicon_filtered.append(word)
-    with open('lex.data','wb') as fp:
-        pickle.dump(lexicon_filtered, fp)
-    return lexicon_filtered
 
 # Build the lexicon
 def lexicon():
@@ -44,7 +18,6 @@ def lexicon():
     words = pos + neg
     # Before and after filtering arrays
     lexicon = []
-    lexicon_filtered = []
     # Create list of words from data set
     [lexicon.append(word.replace('\n', '').lower()) for word in words.split(' ') if word not in stop_words and word not in ['.', ',', '--', '"']]
     # Make each item unique
@@ -53,6 +26,7 @@ def lexicon():
     for key in lexicon_frequency:
         lexicon_frequency[key] = 0
     return lexicon_frequency
+
 
 def generate(fp, lexicon):
     lex = lexicon
