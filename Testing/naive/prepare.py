@@ -1,19 +1,35 @@
+
 # Import required libs
 from nltk.corpus import stopwords
 from collections import Counter
 from nltk.stem import WordNetLemmatizer
 
+
 # Init the lemmatizer
 lemmatizer = WordNetLemmatizer()
+
+
+def generate(fp, lexicon):
+    lex = lexicon
+    with open(fp, 'r') as fp:
+        words = fp.read().lower().replace('\n', ' ').split(' ')
+        for word in words:
+            if word in lex:
+                lex[word] += 1
+        total_pos_words = sum(lex.values())
+        for key in lex:
+            lex[key] = (lex[key] + 1) / (total_pos_words + len(lex))
+
+    return lex
 
 
 # Build the lexicon
 def lexicon():
     # Stop words to ignore
     stop_words = set(stopwords.words('english'))
-    with open('pos2.txt', 'r') as fp:
+    with open('pos.txt', 'r') as fp:
         pos = fp.read()
-    with open('neg2.txt', 'r') as fp:
+    with open('neg.txt', 'r') as fp:
         neg = fp.read()
     words = pos + neg
     # Before and after filtering arrays
@@ -28,21 +44,7 @@ def lexicon():
     return lexicon_frequency
 
 
-def generate(fp, lexicon):
-    lex = lexicon
-    with open(fp, 'r') as fp:
-        words = fp.read().lower().replace('\n', ' ').split(' ')
-        for word in words:
-            if word in lex:
-                lex[word] += 1
-        total_pos_words = sum(lex.values())
-        for key in lex:
-            print((lex[key] + 1) / (total_pos_words + len(lex)))
-            lex[key] = (lex[key] + 1) / (total_pos_words + len(lex))
-    return lex
-
 if __name__ == '__main__':
-    lex = lexicon()
     p_pos = 0.5
     p_neg = 0.5
     pos_lex = generate('pos.txt', lexicon())
@@ -51,11 +53,13 @@ if __name__ == '__main__':
         s = input('>>> ').split(' ')
         p_pos_sentiment = p_pos
         for word in s:
-            if word in pos_lex:
+            if word in pos_lex and word not in set(stopwords.words('english')):
+                print(pos_lex[word])
                 p_pos_sentiment = p_pos_sentiment * pos_lex[word]
         p_neg_sentiment = p_neg
         for word in s:
-            if word in neg_lex:
+            if word in neg_lex and word not in set(stopwords.words('english')):
+                print(neg_lex[word])
                 p_neg_sentiment = p_neg_sentiment * neg_lex[word]
         if p_pos_sentiment > p_neg_sentiment:
             print('Positive')
