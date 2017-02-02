@@ -213,3 +213,5 @@ _Pvt_Extensions/
 ModelManifest.xml
 
 *.cpkt.*
+
+Testing/NeuralNet/model\.ckpt\.data-00000-of-00001
