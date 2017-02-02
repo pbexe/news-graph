@@ -8,7 +8,7 @@ neg_lex = naivebayes.generate('neg.txt', naivebayes.lexicon())
 while 1:
     total = 0
     n = 0
-    for submission in r.subreddit('all').search(input('Search query >>> '), time_filter='day'):
+    for submission in r.subreddit('all').search('Trump', time_filter='day'):
         print(submission.id)
         submission.comments.replace_more(limit=10)
         comment_queue = submission.comments[:]  # Seed with top-level
