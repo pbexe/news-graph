@@ -2,7 +2,6 @@
 # Import required libs
 from nltk.corpus import stopwords
 from collections import Counter
-from tqdm import tqdm
 
 
 def generate(fp, lexicon):
