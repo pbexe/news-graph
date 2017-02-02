@@ -76,12 +76,22 @@
 	"buffers":
 	[
 		{
-			"file": "prepare.py",
+			"file": "naivebayes.py",
 			"settings":
 			{
-				"buffer_size": 2799,
+				"buffer_size": 2777,
 				"encoding": "UTF-8",
 				"line_ending": "Windows"
+			}
+		},
+		{
+			"file": "reddit.py",
+			"settings":
+			{
+				"buffer_size": 833,
+				"encoding": "UTF-8",
+				"line_ending": "Windows",
+				"name": "import naivebayes"
 			}
 		}
 	],
@@ -185,11 +195,11 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Miles/news-graph/Testing/naive",
-		"/C/Users/Miles/news-graph/Testing/naive/__pycache__"
+		"/C/Users/Miles/news-graph/Testing/naive"
 	],
 	"file_history":
 	[
+		"/C/Users/Miles/news-graph/src/updateDB.py",
 		"/C/Users/Miles/news-graph/Testing/twitter_cleaned.py",
 		"/C/Users/Miles/Downloads/saasassasa.py",
 		"/C/Users/Miles/news-graph/Testing/naive/pos.txt",
@@ -301,16 +311,16 @@
 	"groups":
 	[
 		{
-			"selected": 0,
+			"selected": 1,
 			"sheets":
 			[
 				{
 					"buffer": 0,
-					"file": "prepare.py",
+					"file": "naivebayes.py",
 					"semi_transient": false,
 					"settings":
 					{
-						"buffer_size": 2799,
+						"buffer_size": 2777,
 						"regions":
 						{
 							"bookmarks":
@@ -326,8 +336,8 @@
 						"selection":
 						[
 							[
-								235,
-								235
+								2543,
+								2543
 							]
 						],
 						"settings":
@@ -335,6 +345,36 @@
 							"spell_check": true,
 							"syntax": "Packages/Python/Python.sublime-syntax",
 							"tab_size": 4,
+							"translate_tabs_to_spaces": true
+						},
+						"translation.x": 0.0,
+						"translation.y": 1550.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 1,
+					"type": "text"
+				},
+				{
+					"buffer": 1,
+					"file": "reddit.py",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 833,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								833,
+								833
+							]
+						],
+						"settings":
+						{
+							"auto_name": "import naivebayes",
+							"syntax": "Packages/Python/Python.sublime-syntax",
 							"translate_tabs_to_spaces": true
 						},
 						"translation.x": 0.0,
@@ -380,7 +420,7 @@
 	"menu_visible": true,
 	"output.exec":
 	{
-		"height": 355.0
+		"height": 253.0
 	},
 	"output.find_results":
 	{
