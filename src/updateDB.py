@@ -5,6 +5,7 @@ import nltk
 import praw
 from sentiment import naivebayes
 from praw.models import MoreComments
+from tqdm import tqdm
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "mysite.settings")
 django.setup()
 from relationships.models import Story, Node, Edge, Sentiment
@@ -33,12 +34,12 @@ def stories():
     subreddits = ['news', 'worldnews', 'TrueNews', 'neutralnews']
     for subreddit in subreddits:
         submissions = r.subreddit(subreddit).top(limit=100)
-        for item in submissions:
+        for item in tqdm(submissions):
             sentiment = submission_sentiment(item.id)
             print(sentiment)
             stories.append((item.url, item.title, sentiment))
         submissions = r.subreddit(subreddit).hot(limit=100)
-        for item in submissions:
+        for item in tqdm(submissions):
             print(sentiment)
             sentiment = submission_sentiment(item.id)
             stories.append((item.url, item.title, sentiment))
