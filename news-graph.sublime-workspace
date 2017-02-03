@@ -75,6 +75,14 @@
 	},
 	"buffers":
 	[
+		{
+			"file": "news-graph.sublime-project",
+			"settings":
+			{
+				"buffer_size": 45,
+				"line_ending": "Unix"
+			}
+		}
 	],
 	"build_system": "",
 	"build_system_choices":
@@ -99,10 +107,14 @@
 	"build_varint": "",
 	"command_palette":
 	{
-		"height": 354.0,
-		"last_filter": "insta",
+		"height": 140.0,
+		"last_filter": "pyth",
 		"selected_items":
 		[
+			[
+				"pyth",
+				"Set Syntax: Python"
+			],
 			[
 				"insta",
 				"Package Control: Install Package"
@@ -148,7 +160,7 @@
 				"Markdown Preview: Preview in Browser"
 			]
 		],
-		"width": 398.0
+		"width": 414.0
 	},
 	"console":
 	{
@@ -176,10 +188,17 @@
 	},
 	"expanded_folders":
 	[
-		"/C/Users/Miles/news-graph"
+		"/C/Users/Miles/news-graph",
+		"/C/Users/Miles/news-graph/Testing",
+		"/C/Users/Miles/news-graph/Testing/naive"
 	],
 	"file_history":
 	[
+		"/C/Users/Miles/news-graph/README.md",
+		"/C/Users/Miles/news-graph/Testing/naive/reddit.py",
+		"/C/Users/Miles/news-graph/Testing/naive/app.py",
+		"/C/Users/Miles/news-graph/Testing/naive/templates/app.py",
+		"/C/Users/Miles/news-graph/Testing/naive/templates/index.html",
 		"/C/Users/Miles/news-graph/src/updateDB.py",
 		"/C/Users/Miles/news-graph/Testing/twitter_cleaned.py",
 		"/C/Users/Miles/Downloads/saasassasa.py",
@@ -292,8 +311,37 @@
 	"groups":
 	[
 		{
+			"selected": 0,
 			"sheets":
 			[
+				{
+					"buffer": 0,
+					"file": "news-graph.sublime-project",
+					"semi_transient": false,
+					"settings":
+					{
+						"buffer_size": 45,
+						"regions":
+						{
+						},
+						"selection":
+						[
+							[
+								45,
+								45
+							]
+						],
+						"settings":
+						{
+							"syntax": "Packages/JavaScript/JSON.sublime-syntax"
+						},
+						"translation.x": 0.0,
+						"translation.y": 0.0,
+						"zoom_level": 1.0
+					},
+					"stack_index": 0,
+					"type": "text"
+				}
 			]
 		}
 	],
