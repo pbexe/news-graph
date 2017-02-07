@@ -309,3 +309,5 @@ ModelManifest.xml
 Testing/NeuralNet/model\.ckpt\.data-00000-of-00001
 
 *.sublime-workspace
+
+*.pyc

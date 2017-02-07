@@ -164,7 +164,8 @@
             })
             // Give it a random colour
             .style("fill", function(d) {
-                return color(Math.floor(Math.random() * 10) + 1);
+                console.log(d.sentiment)
+                return d.sentiment;
             })
             // Allow dragging instead of panning
         var drag = force.drag()
