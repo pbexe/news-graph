@@ -58,7 +58,7 @@ class Sentiment(models.Model):
     """
     Description: The sentiment of a node
     """
-    sentiment = models.FloatField()
+    sentiment = models.FloatField(null=True, blank=True, default=None)
     node = models.ForeignKey(Node, related_name='sentiment_collected_from')
 
     def __str__(self):
