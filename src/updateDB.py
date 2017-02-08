@@ -31,7 +31,7 @@ def submission_sentiment(id):
 
 def stories():
     stories = []
-    subreddits = ['news', 'worldnews', 'TrueNews', 'neutralnews']
+    subreddits = ['news', 'worldnews']
     for subreddit in subreddits:
         submissions = r.subreddit(subreddit).top(limit=100)
         for item in tqdm(submissions):

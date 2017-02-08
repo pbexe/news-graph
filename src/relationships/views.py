@@ -24,7 +24,7 @@ def ajax(request):
             tempDict['name'] = node.name
             hue = (avg * 120)
             c = Color(hsl=(hue/360, 1, 0.5))
-            tempDict['sentiment'] = c.hex
+            tempDict['sentiment'] = avg
             nodeList.append(tempDict)
     for edge in edges:
         if edge.recent():
