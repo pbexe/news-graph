@@ -15,11 +15,13 @@ from sentiment import naivebayes
 from praw.models import MoreComments
 from tqdm import tqdm
 import string
+from wikiapi import WikiApi
 os.environ.setdefault("DJANGO_SETTINGS_MODULE", "newsgraph.settings")
 django.setup()
 from relationships.models import Story, Node, Edge, Sentiment
 
 
+wiki = WikiApi()
 pos_lex = naivebayes.generate('sentiment/pos.txt', naivebayes.lexicon())
 neg_lex = naivebayes.generate('sentiment/neg.txt', naivebayes.lexicon())
 r = praw.Reddit(client_id='l-Gz5blkt7GCUg',
@@ -172,15 +174,18 @@ def addStory(story):
     nodes = []
     for kw in keywords(story[1]):
         kw = kw.translate(str.maketrans('', '', string.punctuation))
-        if len(Node.objects.filter(name=kw)) < 1:
-            node = Node(name=kw, date=timezone.now(), collectedFrom=s)
-            node.save()
-        else:
-            node = Node.objects.filter(name=kw)[0]
-            node.date = timezone.now()
-        node_sentiment = Sentiment(sentiment=story[2], node=node)
-        node_sentiment.save()
-        nodes.append(node)
+        results = wiki.find(kw)
+        if len(results) > 0:
+            kw = wiki.get_article(results[0]).heading
+            if len(Node.objects.filter(name=kw)) < 1:
+                node = Node(name=kw, date=timezone.now(), collectedFrom=s)
+                node.save()
+            else:
+                node = Node.objects.filter(name=kw)[0]
+                node.date = timezone.now()
+            node_sentiment = Sentiment(sentiment=story[2], node=node)
+            node_sentiment.save()
+            nodes.append(node)
     makeEdges(nodes, story[0])
 
 
