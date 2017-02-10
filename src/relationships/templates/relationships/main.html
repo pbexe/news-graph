@@ -10,9 +10,9 @@
     <script src="//code.jquery.com/jquery-1.12.0.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/materialize/0.97.5/js/materialize.min.js"></script>
     <script src="//d3js.org/d3.v3.min.js" charset="utf-8"></script>
-    <script src="https://d3js.org/d3-color.v1.min.js"></script>
-<script src="https://d3js.org/d3-interpolate.v1.min.js"></script>
-<script src="https://d3js.org/d3-scale-chromatic.v1.min.js"></script>
+    <script src="//d3js.org/d3-color.v1.min.js"></script>
+    <script src="//d3js.org/d3-interpolate.v1.min.js"></script>
+    <script src="//d3js.org/d3-scale-chromatic.v1.min.js"></script>
     <title>News-Graph</title>
 
     <style>
@@ -165,9 +165,8 @@
                     return d.weight;
                 }
             })
-            // Give it a random colour
+            // Give it a colour based off of sentiment interpolated from a swatch
             .style("fill", function(d) {
-                console.log(d.sentiment)
                 return d3.interpolateRdYlGn(d.sentiment);
             })
             // Allow dragging instead of panning

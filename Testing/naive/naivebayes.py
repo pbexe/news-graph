@@ -2,6 +2,7 @@
 # Import required libs
 from nltk.corpus import stopwords
 from collections import Counter
+from tqdm import tqdm
 
 
 def generate(fp, lexicon):
@@ -63,22 +64,22 @@ def sentiment(sentence, pos_lex, neg_lex):
 if __name__ == '__main__':
     pos_lex = generate('pos.txt', lexicon())
     neg_lex = generate('neg.txt', lexicon())
-    # correct = 0
-    # incorrect = 0
-    # with open('pos.txt', 'r') as fp:
-    #         pos = fp.readlines()
-    #         for line in tqdm(pos):
-    #             if sentiment(line, pos_lex, neg_lex) == 1:
-    #                 correct += 1
-    #             else:
-    #                 incorrect += 1
-    # with open('neg.txt', 'r') as fp:
-    #     neg = fp.readlines()
-    #     for line in tqdm(neg):
-    #             if sentiment(line, pos_lex, neg_lex) == 0:
-    #                 correct += 1
-    #             else:
-    #                 incorrect += 1
-    # print(correct/(correct+incorrect)*100)
+    correct = 0
+    incorrect = 0
+    with open('pos.txt', 'r') as fp:
+            pos = fp.readlines()
+            for line in tqdm(pos):
+                if sentiment(line, pos_lex, neg_lex) == 1:
+                    correct += 1
+                else:
+                    incorrect += 1
+    with open('neg.txt', 'r') as fp:
+        neg = fp.readlines()
+        for line in tqdm(neg):
+                if sentiment(line, pos_lex, neg_lex) == 0:
+                    correct += 1
+                else:
+                    incorrect += 1
+    print(correct/(correct+incorrect)*100)
     while 1:
         print(sentiment(input('Sentiment In >>> '), pos_lex, neg_lex))
