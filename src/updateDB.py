@@ -48,7 +48,7 @@ def submission_sentiment(id):
         if isinstance(top_level_comment, MoreComments):
             continue
         total += naivebayes.sentiment(top_level_comment.body, pos_lex, neg_lex)
-        return total / n
+    return total / n if n != 0 else 0.5
 
 
 def stories():

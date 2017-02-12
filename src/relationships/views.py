@@ -2,7 +2,7 @@ from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Node, Edge, Sentiment
 import json
-from colour import Color
+from numpy import interp
 
 
 def ajax(request):
@@ -20,11 +20,10 @@ def ajax(request):
                     total += obj.sentiment
 
             avg = total / n if n > 0 else 0.6
+            avg = interp(avg, [0, 0.8], [0, 1])
             tempDict = {}
             tempDict['name'] = node.name
-            hue = (avg * 120)
-            c = Color(hsl=(hue/360, 1, 0.5))
-            tempDict['sentiment'] = avg
+            tempDict['sentiment'] = avg if avg <= 1 else 1
             nodeList.append(tempDict)
     for edge in edges:
         if edge.recent():
