@@ -7,11 +7,9 @@ import string
 
 def generate(fp, lexicon):
     """Generate probabilities of a word belonging to a certain class
-
     Args:
         fp (str): Location of file
         lexicon (dict): Dictionary of all words known to the classifier
-
     Returns:
         dict: Lexicon of words from `fp`
     """
@@ -29,7 +27,6 @@ def generate(fp, lexicon):
 
 def lexicon():
     """Build the lexicon of all recognized words
-
     Returns:
         Dict: Dictionary of all words as keys and 0s as values
     """
@@ -50,12 +47,10 @@ def lexicon():
 
 def sentiment(sentence, pos_lex, neg_lex):
     """Generate the sentiment of 'sentence' using Bayes' Theorum.
-
     Args:
         sentence (str): Sentence from which the sentiment will be calculated.
         pos_lex (dict): Lexicon of words and their positive frequency.
         neg_lex (dict): Lexicon of words and their negative frequency.
-
     Returns:
         float: Sentiment of `sentence`
     """
@@ -71,9 +66,6 @@ def sentiment(sentence, pos_lex, neg_lex):
         if word in neg_lex and word not in set(stopwords.words('english')):
             p_neg_sentiment = p_neg_sentiment * neg_lex[word]
     if p_neg_sentiment != 0 and p_pos_sentiment != 0:
-        if p_pos_sentiment > p_neg_sentiment:
-            return round(p_pos_sentiment / (p_pos_sentiment + p_neg_sentiment), 4)
-        else:
-            return round(p_pos_sentiment / (p_pos_sentiment + p_neg_sentiment), 4)
+        return round(p_pos_sentiment / (p_pos_sentiment + p_neg_sentiment), 4)
     else:
         return 0.5
