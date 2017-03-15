@@ -1,20 +1,21 @@
 """Tools needed to generate sentiment using a naive bayes classifier.
 """
+
 from nltk.corpus import stopwords
 from collections import Counter
 import string
 
 
 def generate(fp, lexicon):
-    """Generate probabilities of a word belonging to a certain class
 
+    """Generate probabilities of a word belonging to a certain class
     Args:
         fp (str): Location of file
         lexicon (dict): Dictionary of all words known to the classifier
-
     Returns:
         dict: Lexicon of words from `fp`
     """
+
     lex = lexicon
     with open(fp, 'r') as fp:
         words = fp.read().lower().replace('\n', ' ').split(' ')
@@ -28,11 +29,12 @@ def generate(fp, lexicon):
 
 
 def lexicon():
-    """Build the lexicon of all recognized words
 
+    """Build the lexicon of all recognized words
     Returns:
         Dict: Dictionary of all words as keys and 0s as values
     """
+
     stop_words = set(stopwords.words('english'))
     with open('sentiment/pos.txt', 'r') as fp:
         pos = fp.read()
@@ -49,16 +51,16 @@ def lexicon():
 
 
 def sentiment(sentence, pos_lex, neg_lex):
-    """Generate the sentiment of 'sentence' using Bayes' Theorum.
 
+    """Generate the sentiment of 'sentence' using Bayes' Theorum.
     Args:
         sentence (str): Sentence from which the sentiment will be calculated.
         pos_lex (dict): Lexicon of words and their positive frequency.
         neg_lex (dict): Lexicon of words and their negative frequency.
-
     Returns:
         float: Sentiment of `sentence`
     """
+
     s = sentence.split(' ')
     p_pos = 0.5
     p_neg = 0.5
