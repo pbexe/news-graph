@@ -1,3 +1,5 @@
+"""Render the views
+"""
 from django.shortcuts import render
 from django.http import HttpResponse
 from .models import Node, Edge, Sentiment
@@ -6,6 +8,16 @@ from numpy import interp
 
 
 def ajax(request):
+
+    """Returns a JSON object to the client containing all the nodes and edges
+
+    Args:
+        request (obj): The request made to the server
+
+    Returns:
+        obj: HTTP response containing the JSON
+    """
+
     edges = Edge.objects.all()
     nodes = Node.objects.all()
     nodeList = []
@@ -21,17 +33,17 @@ def ajax(request):
 
             avg = total / n if n > 0 else 0.6
             avg = interp(avg, [0, 0.8], [0, 1])
-            tempDict = {}
-            tempDict['name'] = node.name
-            tempDict['sentiment'] = avg if avg <= 1 else 1
-            nodeList.append(tempDict)
+            toAdd = {}
+            toAdd['name'] = node.name
+            toAdd['sentiment'] = avg if avg <= 1 else 1
+            nodeList.append(toAdd)
     for edge in edges:
         if edge.recent():
-            tempDict = {}
-            tempDict['source'] = edge.origin.name
-            tempDict['target'] = edge.destination.name
-            tempDict['origin'] = edge.source
-            edgeList.append(tempDict)
+            toAdd = {}
+            toAdd['source'] = edge.origin.name
+            toAdd['target'] = edge.destination.name
+            toAdd['origin'] = edge.source
+            edgeList.append(toAdd)
     jsonOut = {}
     jsonOut['links'] = edgeList
     jsonOut['nodes'] = nodeList
@@ -40,4 +52,14 @@ def ajax(request):
 
 
 def index(request):
+
+    """Return the index html file
+
+    Args:
+        request (obj): The request made to the server
+
+    Returns:
+        obj: Render object used to render `main.html`
+    """
+
     return render(request, 'relationships/main.html')

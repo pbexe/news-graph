@@ -68,8 +68,6 @@
         // Sizes of the force directed graph
         var width = window.innerWidth - 20,
             height = window.innerHeight - 20;
-        // Make a colour scheme with 20 colours
-        var color = d3.scale.category20();
         // Create the force directed graph
         var force = d3.layout.force()
             // Set the charge between nodes
@@ -105,10 +103,6 @@
             vis.attr("transform",
                 "translate(" + d3.event.translate + ")" + " scale(" + d3.event.scale + ")");
         }
-        // Create tooltips
-        var div = d3.select("body").append("div")
-            .attr("class", "tooltip card")
-            .style("opacity", 0);
         // Get the data from the json
         var graph = root;
         // Build the data structure

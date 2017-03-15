@@ -71,9 +71,6 @@ def sentiment(sentence, pos_lex, neg_lex):
         if word in neg_lex and word not in set(stopwords.words('english')):
             p_neg_sentiment = p_neg_sentiment * neg_lex[word]
     if p_neg_sentiment != 0 and p_pos_sentiment != 0:
-        if p_pos_sentiment > p_neg_sentiment:
-            return round(p_pos_sentiment / (p_pos_sentiment + p_neg_sentiment), 4)
-        else:
-            return round(p_pos_sentiment / (p_pos_sentiment + p_neg_sentiment), 4)
+        return round(p_pos_sentiment / (p_pos_sentiment + p_neg_sentiment), 4)
     else:
         return 0.5
