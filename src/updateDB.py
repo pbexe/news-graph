@@ -47,7 +47,6 @@ def submission_sentiment(id):
         n += 1
         if isinstance(top_level_comment, MoreComments):
             continue
-        print(top_level_comment.body.encode("utf-8"))
         total += naivebayes.sentiment(top_level_comment.body, pos_lex, neg_lex)
     return total / n if n != 0 else 0.5
 
