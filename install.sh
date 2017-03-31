@@ -5,7 +5,7 @@
 echo '===================================================='
 echo 'Downloading required NLTK libs'
 echo '===================================================='
-python -m nltk.downloader -d /usr/local/share/nltk_data stopwords book
+python -m nltk.downloader stopwords book
 cd src/
 echo '===================================================='
 echo 'Check for DB changes'
