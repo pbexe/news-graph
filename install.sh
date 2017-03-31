@@ -19,4 +19,3 @@ echo '===================================================='
 echo 'Updating DB'
 echo '===================================================='
 python3 updateDB.py
-read -n 1 -s -p "Press any key to continue"
