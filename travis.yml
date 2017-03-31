@@ -1,12 +1,3 @@
-#   A basic travis.yml boilerplate for Django projects
-#
-#   The set-up assumes a postgreSQL database.
-#
-#   Replace the following variables in the code:
-# * your_project_settings
-# * your_github_username
-# * your_repo
-
 language: python
 
 python:
@@ -16,11 +7,8 @@ python:
 
 services: postgresql
 
-env:
-  - DJANGO=1.4.1
 
 before_install:
-  - export DJANGO_SETTINGS_MODULE=your_project.settings
   - export PYTHONPATH=$HOME/builds/pbexe/news-graph
   - export PIP_USE_MIRRORS=true
 
