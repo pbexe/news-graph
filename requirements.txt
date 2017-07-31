@@ -2,6 +2,6 @@ Django==1.11.2
 nltk==3.2.4
 numpy==1.13.0
 praw==5.0.1
-requests==2.17.3
+requests==2.18.2
 tqdm==4.15.0
 wikiapi==1.2.5
